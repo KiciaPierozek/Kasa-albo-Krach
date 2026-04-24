@@ -10,9 +10,9 @@ protected:
     unsigned int iloscAkcji;
     Akcje akcja;
 public:
-    Firma(const std::string& nazwa, const std::string& skrot, long double wartosc, float dywidendy,
+    Firma(const std::string& nazwa, long double wartosc, float dywidendy,
         unsigned int ilosc_akcji, const Akcje& akcja)
-        : Placowka(nazwa, skrot),
+        : Placowka(nazwa),
         wartosc(wartosc),
         dywidendy(dywidendy),
         iloscAkcji(ilosc_akcji),
@@ -21,9 +21,6 @@ public:
 
     std::string getNazwa() {
         return nazwa;
-    }
-    std::string getSkrot() {
-        return skrot;
     }
     double long getWartosc() {
         return wartosc;

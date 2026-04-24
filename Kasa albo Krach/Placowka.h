@@ -8,10 +8,8 @@
 class Placowka {
 protected:
     std::string nazwa;
-    std::string skrot;
 public:
-    Placowka(std::string nazwa, std::string skrot)
-        : nazwa(nazwa), skrot(skrot) {
-    }
+    Placowka(std::string nazwa)
+        : nazwa(nazwa) {}
 };
 #endif //SYMULATORGIELDY_PLACOWKA_H

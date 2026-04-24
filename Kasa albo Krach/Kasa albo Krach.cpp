@@ -13,4 +13,6 @@ int main() {
     wyswietlacz.glowneMenu(gracz);
     wyswietlacz.uMaklera();
     wyswietlacz.sprawdzNotowania();
+    std::cout << "Różnica: " << std::showpos << (long double)(((long double)1041 / (long double)1034) - (long double)1) * 100 << std::noshowpos << "%" << std::endl;
+    wyswietlacz.obstaw();
 }

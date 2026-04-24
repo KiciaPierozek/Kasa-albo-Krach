@@ -14,9 +14,11 @@ public:
 
     void uMaklera();
     void sprawdzNotowania();
-    void infoNotowanie(Firma& firma);
-    void zarzadzajAktywami();
-    void sprzedajAktywo();
+    void spytajOKtore();
+    void infoNotowanie(Firma& firma, long double cenaTrzyDni);
+    void zarzadzajAktywami(Gracz& gracz);
+    void kupAktywo(Gracz& gracz);
+    void sprzedajAktywo(Gracz& gracz);
     void rozejrzyjSieMakler();
 
     //BANK
@@ -24,11 +26,23 @@ public:
     void wBanku();
     void warunkiKredytu(Bank& bank);
     void branieKredytu();
-    void splacanieKredytu();
+    void gratulacjeKredyt();
+    void splacanieKredytu(Bank& bank);
     void rozejrzyjSieBank();
 
     void przespijSie();
 
     //Kasyno
+
+    void wKasynie();
+    void wyborGry();
+    void graWybrana();
+    void blackJack();
+    void obstaw();
+    void ruletka();
+    void kasynoWygrana(long double wygrana);
+	void kasynoPrzegrana();
+    void rozejrzyjSieKasyno();
+
 };
 
