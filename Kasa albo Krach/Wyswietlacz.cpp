@@ -33,7 +33,12 @@ Piotr Mleczko 2026
 void Wyswietlacz::poczatekGry() {
     std::cout << "Nacisnij przycisk aby zagrać" << std::endl;
 }
-
+void Wyswietlacz::uzueplnijDane1() {
+    std::cout << "Podaj nazwę gracza: " << std::endl;
+}
+void Wyswietlacz::uzueplnijDane2() {
+    std::cout << "Podaj cel (kwotę, którą chcesz osiągnąć): " << std::endl;
+}
 void Wyswietlacz::glowneMenu(Gracz& gracz) {
     std::cout << "Kapitał: " << gracz.getKapital() << std::endl;
     std::cout << "Środki: " << gracz.getSrodki() << std::endl;

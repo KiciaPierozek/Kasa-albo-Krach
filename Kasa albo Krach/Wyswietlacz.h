@@ -9,6 +9,8 @@ public:
     Wyswietlacz() {}
     void ekranPowitalny();
     void poczatekGry();
+    void uzueplnijDane1();
+	void uzueplnijDane2();
     void glowneMenu(Gracz& gracz); // pierwszy wybor, dom maklerski, bank itp.
     //DOM MAKLERSKI
 
