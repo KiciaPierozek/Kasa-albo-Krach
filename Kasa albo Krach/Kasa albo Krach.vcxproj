@@ -127,7 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Akcje.cpp" />
+    <ClCompile Include="Bank.cpp" />
+    <ClCompile Include="Firma.cpp" />
+    <ClCompile Include="Gracz.cpp" />
     <ClCompile Include="Kasa albo Krach.cpp" />
+    <ClCompile Include="Kasyno.cpp" />
+    <ClCompile Include="Kredyt.cpp" />
+    <ClCompile Include="Placowka.cpp" />
+    <ClCompile Include="Silnik.cpp" />
+    <ClCompile Include="Wyswietlacz.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Akcje.h" />
+    <ClInclude Include="Bank.h" />
+    <ClInclude Include="Firma.h" />
+    <ClInclude Include="Gracz.h" />
+    <ClInclude Include="Kasyno.h" />
+    <ClInclude Include="Kredyt.h" />
+    <ClInclude Include="Placowka.h" />
+    <ClInclude Include="Silnik.h" />
+    <ClInclude Include="Wyswietlacz.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
