@@ -24,7 +24,7 @@ public:
     int getIdbanku(){
         return idBanku;
 	}
-    Kredyt getKredyt() {
+    Kredyt& getKredyt() {
         return kredyt;
 	}
 };

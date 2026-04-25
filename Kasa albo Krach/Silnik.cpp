@@ -60,3 +60,11 @@ void Silnik::glownaPetla() {
 		lokacja->wejdz(wyswietlacz, gracz);
 	}
 }
+void Silnik::wBanku() {
+	wyswietlacz.wBanku();
+	std::cin >> wybor;
+	switch (wybor) {
+	case 1:
+		wyswietlacz.warunkiKredytu(peKO);
+	}
+}
