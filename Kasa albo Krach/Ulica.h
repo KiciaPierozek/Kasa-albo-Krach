@@ -5,7 +5,7 @@ class Gracz;
 class Ulica : public Placowka
 {
 	public:
-		Ulica();
+		Ulica() {};
 	Ulica(const std::string& nazwa) : Placowka(nazwa) {}
 	void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz) const override {
 		wyswietlacz.glowneMenu(gracz);

@@ -13,6 +13,7 @@ class Placowka {
 protected:
     std::string nazwa;
 public:
+    Placowka() : nazwa("Ulica ściany") {}
     Placowka(std::string nazwa)
         : nazwa(nazwa) {}
     virtual void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz) const = 0;
