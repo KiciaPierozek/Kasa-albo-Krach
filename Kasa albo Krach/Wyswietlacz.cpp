@@ -39,6 +39,10 @@ void Wyswietlacz::uzueplnijDane1() {
 void Wyswietlacz::uzueplnijDane2() {
     std::cout << "Podaj cel (kwotę, którą chcesz osiągnąć): " << std::endl;
 }
+void Wyswietlacz::wybierzPoziomTrudnosci() {
+    std::cout << "Wybierz poziom trudności: " << std::endl;
+	std::cout << "1 Łatwy | 2 Średni | 3 Trudny" << std::endl;
+}
 void Wyswietlacz::glowneMenu(Gracz& gracz) {
     std::cout << "Kapitał: " << gracz.getKapital() << std::endl;
     std::cout << "Środki: " << gracz.getSrodki() << std::endl;

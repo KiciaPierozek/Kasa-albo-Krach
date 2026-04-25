@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Kasa albo Krach/Kasa albo Krach.vcxproj" />
+  <Project Path="Kasa albo Krach/Kasa albo Krach.vcxproj" Id="ba787e58-d61f-42e2-a97e-32c6b2e6e76e" />
 </Solution>

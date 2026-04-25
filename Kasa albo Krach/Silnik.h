@@ -4,18 +4,22 @@
 #include "Firma.h"
 #include "Bank.h"
 #include "Akcje.h"
+#include "Ulica.h"
+#include "DomMaklerski.h"
+#include "Kasyno.h"
+#include <vector>
+#include <memory>
 class Silnik
 {
 private:
-    struct{
-        const short naUlicy = 0;
-        const short wDomuMaklerskim = 1;
-        const short wBanku = 2;
-        const short wKasynie = 3;
-        const short przegrana = 4;
-        const short wygrana = 5;
-    }stanGry;
-};
+    Wyswietlacz wyswietlacz;
+    std::vector<Firma> firmy;
+    std::vector<Akcje> akcje;
+    std::shared_ptr<Placowka> lokacja; 
 
-void glownaPetla() {
-}
+public:
+    void glownaPetla();
+    void losujCenyAkcji(std::vector<Firma>& firma, long double q);
+	long double losujWspolczynnikZmianyCeny();
+    void start();
+};

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include "Wyswietlacz.h"
 #include "Kredyt.h"
 #include "Placowka.h"
 class Bank : public Placowka
@@ -16,7 +16,9 @@ public:
         kredyt(kredyt) {
     }
     void ponaglij();
-    void wejdzDoBanku();
+    void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz) const override {
+		wyswietlacz.wBanku();
+    }
     void zaciagnijKredyt();
 
     int getIdbanku(){

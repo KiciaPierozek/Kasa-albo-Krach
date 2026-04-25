@@ -8,10 +8,10 @@ protected:
     long double wartosc;
     float dywidendy; //na jedna akcje
     unsigned int iloscAkcji;
-    Akcje akcja;
+    Akcje& akcja;
 public:
     Firma(const std::string& nazwa, long double wartosc, float dywidendy,
-        unsigned int ilosc_akcji, const Akcje& akcja)
+        unsigned int ilosc_akcji, Akcje akcja)
         : Placowka(nazwa),
         wartosc(wartosc),
         dywidendy(dywidendy),

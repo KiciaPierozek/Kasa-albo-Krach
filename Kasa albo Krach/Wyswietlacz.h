@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include "Akcje.h"
-#include "Bank.h"
 #include "Firma.h"
+class Gracz;
+class Bank;
 class Wyswietlacz
 {
 public:
@@ -11,6 +12,7 @@ public:
     void poczatekGry();
     void uzueplnijDane1();
 	void uzueplnijDane2();
+    void wybierzPoziomTrudnosci();
     void glowneMenu(Gracz& gracz); // pierwszy wybor, dom maklerski, bank itp.
     //DOM MAKLERSKI
 
