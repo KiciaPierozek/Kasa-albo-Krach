@@ -21,7 +21,8 @@ public:
     void spytajOKtore();
     void infoNotowanie(Firma& firma, long double cenaTrzyDni);
     void zarzadzajAktywami(Gracz& gracz);
-    void kupAktywo(Gracz& gracz);
+    void Aktywo1(Gracz& gracz);
+    void Aktywo2(Gracz& gracz);
     void sprzedajAktywo(Gracz& gracz);
     void rozejrzyjSieMakler();
 

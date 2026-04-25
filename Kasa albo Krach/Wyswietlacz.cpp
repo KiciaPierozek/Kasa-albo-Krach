@@ -89,8 +89,10 @@ void Wyswietlacz::zarzadzajAktywami(Gracz& gracz) {
     std::cout << "Co chcesz zrobić?" << std::endl;
     std::cout << "1 Kup aktywo | 2 Sprzedaj aktywo | 3 Rozejrzyj się | 4 Wyjdź" << std::endl;
 }
-
-void Wyswietlacz::kupAktywo(Gracz& gracz) {
+void Wyswietlacz::Aktywo1(Gracz& gracz) {
+    std::cout << "Numer: " << std::endl;
+}
+void Wyswietlacz::Aktywo2(Gracz& gracz) {
     std::cout << "Ilość: " << std::endl;
 }
 

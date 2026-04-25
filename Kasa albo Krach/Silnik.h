@@ -13,9 +13,11 @@ class Silnik
 {
 private:
     Wyswietlacz wyswietlacz;
-    std::vector<Firma> firmy;
+    Gracz gracz;
+    std::shared_ptr<std::vector<Firma>> firmy = std::make_shared<std::vector<Firma>>();
     std::vector<Akcje> akcje;
-    std::shared_ptr<Placowka> lokacja; 
+    std::shared_ptr<Placowka> lokacja;
+    std::shared_ptr<std::vector<Firma>> firma = firmy;
 
 public:
     void glownaPetla();
