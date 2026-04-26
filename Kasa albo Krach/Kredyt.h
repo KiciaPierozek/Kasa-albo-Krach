@@ -23,5 +23,17 @@ public:
     float getStawkaKary() const {
         return stawkaKary;
 	}
+    void setWartosc(long double wartosc_) {
+        this->wartosc = wartosc_;
+	}
+    void setOprocentowanie(float oprocentowanie_) {
+        this->oprocentowanie = oprocentowanie_;
+    }
+    void setCzas(int czas_) {
+        this->czas = czas_;
+    }
+    void setStawkaKary(float stawkaKary_) {
+        this->stawkaKary = stawkaKary_;
+    }
 };
 

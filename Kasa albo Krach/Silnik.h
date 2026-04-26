@@ -31,6 +31,10 @@ public:
     Silnik() {}
     void glownaPetla();
     void losujCenyAkcji(std::vector<Firma>& firma, long double q);
+    float losujOprocentowanie();
+    int losujCzasKredytu();
+	float losujStawkeKary(Bank& bank);
+	void losujOferteBanku(Bank& bank);
 	long double losujWspolczynnikZmianyCeny();
 	void przespijSie();
     void start();

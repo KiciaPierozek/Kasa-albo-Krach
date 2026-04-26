@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <stdlib.h>
+#include <iomanip>
 #include "Wyswietlacz.h"
 #include "Gracz.h"
 #include "Silnik.h"
@@ -129,9 +130,9 @@ void Wyswietlacz::wBanku() {
 void Wyswietlacz::warunkiKredytu(Bank& bank) {
     system("CLS");
     std::cout << "Bank oferuje następujące warunki kredytu: " << std::endl;
-	std::cout << "Oprocentowanie: " << bank.getKredyt().getOprocentowanie() << "%" << std::endl;
+	std::cout << "Oprocentowanie: " << std::fixed << std::setprecision(2) << bank.getKredyt().getOprocentowanie() * 100 << "%" << std::endl;
 	std::cout << "Czas trwania: " << bank.getKredyt().getCzas() << " dni" << std::endl;
-	std::cout << "Stawka kary za nieterminową spłatę: " << bank.getKredyt().getStawkaKary() << "%" << std::endl;
+	std::cout << "Stawka kary za nieterminową spłatę: " << bank.getKredyt().getStawkaKary() * 100 << "%" << std::endl;
 	std::cout << "1 Przystań na te warunki i weź kredyt | 2 Odrzuć ofertę" << std::endl;
 }
 void Wyswietlacz::odrzucKredyt() {
@@ -158,6 +159,11 @@ void Wyswietlacz::splacanieKredytu(Bank& bank) {
     std::cout << "Dni pozostałe do spłaty: " << bank.getKredyt().getCzas() << std::endl;
 	std::cout << "Do spłacenia pozostało: " << bank.getKredyt().getWartosc() << std::endl;
     std::cout << "Ile chcesz spłacić?: " << std::endl;
+}
+void Wyswietlacz::gratulacjeSplacenie() {
+    system("CLS");
+    std::cout << "Gratulacje, Spłaciłeś kredyt! Ciesz się wolnością (na razie)" << std::endl;
+    system("pause");
 }
 void Wyswietlacz::infoSplacenie(Bank& bank, long double kwota) {
     system("CLS");

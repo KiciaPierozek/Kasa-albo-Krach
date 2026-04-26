@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <stdlib.h>
+#include <iomanip>
 #include "Akcje.h"
 #include "Firma.h"
 class Silnik;
@@ -40,6 +41,7 @@ public:
     void nieMaszKredytu();
 	void odrzucKredyt();
     void gratulacjeKredyt();
+    void gratulacjeSplacenie();
     void splacanieKredytu(Bank& bank);
     void infoSplacenie(Bank& bank, long double kwota);
     void rozejrzyjSieBank();
