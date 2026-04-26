@@ -14,6 +14,7 @@ public:
 	void uzueplnijDane2();
     void wybierzPoziomTrudnosci();
     void glowneMenu(Gracz& gracz); // pierwszy wybor, dom maklerski, bank itp.
+    void spytajOIlosc();
     //DOM MAKLERSKI
 
     void uMaklera();
@@ -31,8 +32,10 @@ public:
     void wBanku();
     void warunkiKredytu(Bank& bank);
     void branieKredytu();
+	void odrzucKredyt();
     void gratulacjeKredyt();
     void splacanieKredytu(Bank& bank);
+    void infoSplacenie(Bank& bank, long double kwota);
     void rozejrzyjSieBank();
 
     void przespijSie();
@@ -41,7 +44,7 @@ public:
 
     void wKasynie();
     void wyborGry();
-    void graWybrana();
+    void stawka();
     void blackJack();
     void obstaw();
     void ruletka();

@@ -74,7 +74,9 @@ void Wyswietlacz::sprawdzNotowania() {
 void Wyswietlacz::spytajOKtore() {
     std::cout << "Której spółki? (Podaj numer)" << std::endl;
 }
-
+void Wyswietlacz::spytajOIlosc() {
+	std::cout << "Ile? : " << std::endl;
+}
 void Wyswietlacz::infoNotowanie(Firma& firma, long double cenaTrzyDni) {
     std::cout << firma.getNazwa() << " :" << std::endl;
     std::cout << "2 dni temu: " << firma.getAkcja().getCenaDwaDniPrzed() << " Różnica: " << ((firma.getAkcja().getCenaDwaDniPrzed()/cenaTrzyDni)-1)*100 << "%" << std::endl;
@@ -88,9 +90,6 @@ void Wyswietlacz::zarzadzajAktywami(Gracz& gracz) {
     }
     std::cout << "Co chcesz zrobić?" << std::endl;
     std::cout << "1 Kup aktywo | 2 Sprzedaj aktywo | 3 Rozejrzyj się | 4 Wyjdź" << std::endl;
-}
-void Wyswietlacz::Aktywo1(Gracz& gracz) {
-    std::cout << "Numer: " << std::endl;
 }
 void Wyswietlacz::Aktywo2(Gracz& gracz) {
     std::cout << "Ilość: " << std::endl;
@@ -116,7 +115,9 @@ void Wyswietlacz::warunkiKredytu(Bank& bank) {
 	std::cout << "Stawka kary za nieterminową spłatę: " << bank.getKredyt().getStawkaKary() << "%" << std::endl;
 	std::cout << "1 Przystań na te warunki i weź kredyt | 2 Odrzuć ofertę" << std::endl;
 }
-
+void Wyswietlacz::odrzucKredyt() {
+    std::cout << "Odrzuciłeś ofertę kredytu." << std::endl;
+}
 void Wyswietlacz::branieKredytu() {
     std::cout << "Na jaką kwotę (maksymalnie do 100 tys): " << std::endl;
 }
@@ -126,8 +127,12 @@ void Wyswietlacz::gratulacjeKredyt() {
 void Wyswietlacz::splacanieKredytu(Bank& bank) {
     std::cout << "Dni pozostałe do spłaty: " << bank.getKredyt().getCzas() << std::endl;
 	std::cout << "Do spłacenia pozostało: " << bank.getKredyt().getWartosc() << std::endl;
+    std::cout << "Ile chcesz spłacić?: " << std::endl;
 }
-
+void Wyswietlacz::infoSplacenie(Bank& bank, long double kwota) {
+    std::cout << "Spłaciłeś " << kwota << std::endl;
+    std::cout << ". Pozostało do spłaty: " << bank.getKredyt().getWartosc() << std::endl;
+}
 void Wyswietlacz::rozejrzyjSieBank() {
     std::cout << "Wygląda jak bank." << std::endl;
 }
@@ -148,7 +153,7 @@ void Wyswietlacz::wyborGry() {
 	std::cout << "1 BlackJack | 2 Ruletka | 3 Jednak nie" << std::endl;
 }
 
-void Wyswietlacz::graWybrana() {
+void Wyswietlacz::stawka() {
     std::cout << "Podaj stawkę:" << std::endl;
 }
 
