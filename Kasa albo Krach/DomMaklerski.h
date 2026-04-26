@@ -6,7 +6,7 @@ class Gracz;
 class DomMaklerski : public Placowka
 {
 public:
-    void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz) const override {
+    void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz, int dni) const override {
         wyswietlacz.uMaklera();
 	}
 };

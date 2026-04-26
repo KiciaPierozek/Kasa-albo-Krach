@@ -4,6 +4,7 @@
 #include <random>
 #include <iostream>
 #include <memory>
+#include <stdlib.h>
 
 long double Silnik::losujWspolczynnikZmianyCeny() {
 	static std::random_device rd;
@@ -20,11 +21,15 @@ void Silnik::losujCenyAkcji(std::vector<Firma>& firma, long double q) {
 }
 void Silnik::start() {
 	srand(time(NULL));
+	Wyswietlacz wyswietlacz;
 	Kredyt kredytpeKO(0, 1, 2, 0);
 	Bank peKO("PeKO", 1, kredytpeKO);
-	auto ulica = std::make_shared<Ulica>();
+	wsulica = std::make_shared<Ulica>();
+	wspeKO = std::make_shared<Bank>("PeKO", 1, kredytpeKO);
+	wsgielda = std::make_shared<DomMaklerski>();
+	//wskasyno = std::make_shared<Kasyno>();
 
-	lokacja = ulica;
+	lokacja = wsulica;
 	short wybor;
 	int startowaKasa = 0;
 	wyswietlacz.ekranPowitalny();
@@ -52,19 +57,113 @@ void Silnik::start() {
 		startowaKasa = 1000;
 		break;
 	};
-	Gracz gracz(0, startowaKasa, nazwa, cel);
+	this->gracz = Gracz(0, startowaKasa, nazwa, cel);
 	glownaPetla();
 }
 void Silnik::glownaPetla() {
+	if (!lokacja) lokacja = wsulica;
 	while (true) {
-		lokacja->wejdz(wyswietlacz, gracz);
+		lokacja->wejdz(wyswietlacz, gracz, dni);
+		std::cin >> wybor;
+		switch (wybor) {
+		case 1:
+			lokacja = wsgielda;
+			break;
+		case 2:
+			lokacja = wspeKO;
+			break;
+		case 3:
+			//lokacja = wskasyno;
+			break;
+		case 4:
+			przespijSie();
+			lokacja = wsulica;
+			break;
+		default:
+			lokacja = wsulica;
+			break;
+		}
+		if (lokacja == wspeKO) {
+			wBanku();
+			lokacja = wsulica;
+		}
+		 else if (lokacja == wsgielda) {
+			//wDomuMaklerskim();
+			lokacja = wsulica;
+		}
+		 else if (lokacja == wskasyno) {
+			//wKasynie();
+			lokacja = wsulica;
+		}
+		 else if (lokacja == wsulica) {
+		}
+		 else {
+			std::cout << "Nieznana lokacja. Wracam na ulicę." << std::endl;
+			system("pause");
+			lokacja = wsulica;
+		}
 	}
 }
-void Silnik::wBanku() {
-	wyswietlacz.wBanku();
+void Silnik::przespijSie() {
+	dni++;
+	wyswietlacz.przespijSie();
+}
+void Silnik::naUlicy() {
+	wyswietlacz.glowneMenu(gracz, dni);
 	std::cin >> wybor;
-	switch (wybor) {
-	case 1:
-		wyswietlacz.warunkiKredytu(peKO);
+}
+void Silnik::wBanku() {
+	bool wyjscie = false;
+	bool wKredycie = peKO.getCzyKredyt();
+	long double kwota;
+	while (!wyjscie) {
+		wyswietlacz.wBanku();
+		std::cin >> wybor;
+		switch (wybor) {
+		case 1:
+			if (wKredycie) {
+				std::cout << "Już masz kredyt! Nie możesz wziąć kolejnego." << std::endl;
+				break;
+			}
+			wyswietlacz.warunkiKredytu(peKO);
+			std::cin >> wybor;
+			if (wybor == 1) {
+				wyswietlacz.branieKredytu();
+				std::cin >> kwota;
+				while (kwota < 0 || kwota > 100000) {
+					wyswietlacz.zlaKwotaKredytu();
+					std::cin >> kwota;
+				}
+				peKO.setCzyKredyt(true);
+				gracz.setSrodki(gracz.getSrodki() + kwota);
+				wyswietlacz.gratulacjeKredyt();
+				break;
+			}else if (wybor != 1) {
+				break;
+			}
+		case 2:
+			if (!wKredycie) {
+				wyswietlacz.nieMaszKredytu();
+				break;
+			}
+			wyswietlacz.splacanieKredytu(peKO);
+			std::cin >> kwota;
+			if (kwota < 0 || kwota > peKO.getKredyt().getWartosc()) {
+				wyswietlacz.zlaKwotaKredytu();
+				break;
+			}
+			peKO.getKredyt().splac(kwota);
+			wyswietlacz.infoSplacenie(peKO, kwota);
+			break;
+		case 3:
+			wyswietlacz.rozejrzyjSieBank();
+			break;
+		case 4:
+			wyjscie = true;
+			break;
+		default:
+			wyswietlacz.niepoprawnyWybor();
+			break;
+		}
 	}
 }

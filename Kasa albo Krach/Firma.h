@@ -5,11 +5,12 @@
 class Firma : public Placowka
 {
 protected:
-    long double wartosc;
-    float dywidendy; //na jedna akcje
-    unsigned int iloscAkcji;
+    long double wartosc = 0;
+    float dywidendy = 0; //na jedna akcje
+    unsigned int iloscAkcji = 0;
     Akcje& akcja;
 public:
+	Firma() = default;
     Firma(const std::string& nazwa, long double wartosc, float dywidendy,
         unsigned int ilosc_akcji, Akcje akcja)
         : Placowka(nazwa),

@@ -2,11 +2,12 @@
 #include "Gracz.h"
 class Kredyt
 {
-    long double wartosc;
-    float oprocentowanie;
-    int czas;
-    float stawkaKary;
+    long double wartosc = 0;
+    float oprocentowanie = 0;
+    int czas = 0;
+    float stawkaKary = 0;
 public:
+	Kredyt() = default;
     Kredyt(double long wartosc, float oprocentowanie, int czas, float stawkaKary) : wartosc(wartosc), oprocentowanie(oprocentowanie), czas(czas), stawkaKary(stawkaKary) {}
     void splac(double kwota);
     void pobierzKare(double stawka, Gracz& gracz);

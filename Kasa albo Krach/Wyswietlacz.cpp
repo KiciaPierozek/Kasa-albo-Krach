@@ -2,6 +2,7 @@
 // Created by Admin on 22.04.2026.
 //
 #include <iostream>
+#include <stdlib.h>
 #include "Wyswietlacz.h"
 #include "Gracz.h"
 #include "Silnik.h"
@@ -32,25 +33,31 @@ Piotr Mleczko 2026
 
 void Wyswietlacz::poczatekGry() {
     std::cout << "Nacisnij przycisk aby zagrać" << std::endl;
+    system("pause");
+    system("CLS");
 }
 void Wyswietlacz::uzueplnijDane1() {
     std::cout << "Podaj nazwę gracza: " << std::endl;
 }
 void Wyswietlacz::uzueplnijDane2() {
+    system("CLS");
     std::cout << "Podaj cel (kwotę, którą chcesz osiągnąć): " << std::endl;
 }
 void Wyswietlacz::wybierzPoziomTrudnosci() {
+    system("CLS");
     std::cout << "Wybierz poziom trudności: " << std::endl;
 	std::cout << "1 Łatwy | 2 Średni | 3 Trudny" << std::endl;
 }
-void Wyswietlacz::glowneMenu(Gracz& gracz) {
-    std::cout << "Kapitał: " << gracz.getKapital() << std::endl;
+void Wyswietlacz::glowneMenu(Gracz& gracz, int dni) {
+    system("CLS");
+    std::cout << "Kapitał: " << gracz.getKapital() << "\t\t\t\t\t Dzień: " << dni << std::endl;
     std::cout << "Środki: " << gracz.getSrodki() << std::endl;
     std::cout << "Co chcesz zrobić? " << std::endl;
-    std::cout << "1 Idź do domu maklerskiego | 2 Idź do banku | 3 prześpij się (pomija dzień)" << std::endl;
+    std::cout << "1 Idź do domu maklerskiego | 2 Idź do banku | 3 Idź do kasyna | 4 prześpij się (pomija dzień)" << std::endl;
 }
 
 void Wyswietlacz::uMaklera() {
+    system("CLS");
     std::cout << "W domu maklerskim..." << std::endl;
     std::cout << "Co chcesz zrobić? " << std::endl;
     std::cout << "1 Sprawdź notowania | 2 Zarządzaj aktywami | 3 Rozejrzyj się | 4 Wyjdź" << std::endl;
@@ -77,6 +84,14 @@ void Wyswietlacz::spytajOKtore() {
 void Wyswietlacz::spytajOIlosc() {
 	std::cout << "Ile? : " << std::endl;
 }
+void Wyswietlacz::niepoprawnyWybor() {
+    std::cout << "Niepoprawny wybór -w-." << std::endl;
+}
+void Wyswietlacz::przespijSie() {
+	system("CLS");
+    std::cout << "Przespałeś się i minął kolejny dzień." << std::endl;
+	system("pause");
+}
 void Wyswietlacz::infoNotowanie(Firma& firma, long double cenaTrzyDni) {
     std::cout << firma.getNazwa() << " :" << std::endl;
     std::cout << "2 dni temu: " << firma.getAkcja().getCenaDwaDniPrzed() << " Różnica: " << ((firma.getAkcja().getCenaDwaDniPrzed()/cenaTrzyDni)-1)*100 << "%" << std::endl;
@@ -100,15 +115,19 @@ void Wyswietlacz::sprzedajAktywo(Gracz& gracz) {
 }
 
 void Wyswietlacz::rozejrzyjSieMakler() {
+	system("CLS");
     std::cout << "Wygląda jak dom maklerski." << std::endl;
+	system("pause");
 }
 
 void Wyswietlacz::wBanku() {
+    system("CLS");
 	std::cout << "Wszedłeś do banku. Co chcesz zrobić?" << std::endl;
     std::cout << "1 Weź kredyt | 2 Spłać zaczęrpnięty kredyt | 3 Rozejrzyj się | 4 Wyjdź" << std::endl;
 }
 
 void Wyswietlacz::warunkiKredytu(Bank& bank) {
+    system("CLS");
     std::cout << "Bank oferuje następujące warunki kredytu: " << std::endl;
 	std::cout << "Oprocentowanie: " << bank.getKredyt().getOprocentowanie() << "%" << std::endl;
 	std::cout << "Czas trwania: " << bank.getKredyt().getCzas() << " dni" << std::endl;
@@ -116,39 +135,52 @@ void Wyswietlacz::warunkiKredytu(Bank& bank) {
 	std::cout << "1 Przystań na te warunki i weź kredyt | 2 Odrzuć ofertę" << std::endl;
 }
 void Wyswietlacz::odrzucKredyt() {
+    system("CLS");
     std::cout << "Odrzuciłeś ofertę kredytu." << std::endl;
 }
 void Wyswietlacz::branieKredytu() {
     std::cout << "Na jaką kwotę (maksymalnie do 100 tys): " << std::endl;
 }
+void Wyswietlacz::zlaKwotaKredytu() {
+    std::cout << "Niepoprawna kwota." << std::endl;
+    std::cout << "Spróbuj jeszcze raz" << std::endl;
+}
+void Wyswietlacz::nieMaszKredytu() {
+    std::cout << "Nie masz kredytu do spłacenia!" << std::endl;
+	system("pause");
+}
 void Wyswietlacz::gratulacjeKredyt() {
     std::cout << "Gratulacje! Wziąłeś kredyt!" << std::endl;
+	system("pause");
 }
 void Wyswietlacz::splacanieKredytu(Bank& bank) {
+    system("CLS");
     std::cout << "Dni pozostałe do spłaty: " << bank.getKredyt().getCzas() << std::endl;
 	std::cout << "Do spłacenia pozostało: " << bank.getKredyt().getWartosc() << std::endl;
     std::cout << "Ile chcesz spłacić?: " << std::endl;
 }
 void Wyswietlacz::infoSplacenie(Bank& bank, long double kwota) {
+    system("CLS");
     std::cout << "Spłaciłeś " << kwota << std::endl;
     std::cout << ". Pozostało do spłaty: " << bank.getKredyt().getWartosc() << std::endl;
+	system("pause");
 }
 void Wyswietlacz::rozejrzyjSieBank() {
+    system("CLS");
     std::cout << "Wygląda jak bank." << std::endl;
+	system("pause");
 }
 
 
-void Wyswietlacz::przespijSie() {
-	std::cout << "Przespałeś się. Dzień minął." << std::endl;
-    
-}
 
 void Wyswietlacz::wKasynie() {
+    system("CLS");
 	std::cout << "Wszedłeś do kasyna. Co chcesz zrobić?" << std::endl;
 	std::cout << "1 Zagraj w grę | 2 Rozejrzyj się | 3 Wyjdź" << std::endl;
 }
 
 void Wyswietlacz::wyborGry() {
+    system("CLS");
     std::cout << "Jaką?:" << std::endl;
 	std::cout << "1 BlackJack | 2 Ruletka | 3 Jednak nie" << std::endl;
 }
@@ -161,6 +193,7 @@ void Wyswietlacz::blackJack() {
     //do implementacji!!!
 }
 void Wyswietlacz::obstaw() {
+    system("CLS");
     std::cout << "A więc ruletka..." << std::endl;
 	std::cout << "Na co chcesz postawić?" << std::endl;
 	std::cout << R"(
@@ -176,13 +209,19 @@ void Wyswietlacz::ruletka() {
 }
 
 void Wyswietlacz::kasynoWygrana(long double wygrana) {
+    system("CLS");
 	std::cout << "Gratulacje! Wygrałeś " << wygrana << std::endl;
+	system("pause");
 }
 
 void Wyswietlacz::kasynoPrzegrana() {
+    system("CLS");
     std::cout << "Przegrałeś :<" << std::endl;
+	system("pause");
 }
 
 void Wyswietlacz::rozejrzyjSieKasyno() {
+    system("CLS");
 	std::cout << "Wygląda jak kasyno." << std::endl;
+	system("pause");
 }

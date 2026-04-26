@@ -11,12 +11,13 @@ class Wyswietlacz;
 class Gracz;
 class Placowka {
 protected:
-    std::string nazwa;
+    std::string nazwa = "";
 public:
-    Placowka() : nazwa("Ulica ściany") {}
+
+	Placowka() = default;
     Placowka(std::string nazwa)
         : nazwa(nazwa) {}
-    virtual void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz) const = 0;
+    virtual void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz, int dni) const = 0;
 	virtual ~Placowka() {}
 };
 #endif //SYMULATORGIELDY_PLACOWKA_H

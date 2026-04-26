@@ -2,14 +2,15 @@
 #include <string>
 class Akcje {
 protected:
-    long double cena;
-    unsigned int numer;
-    long double cenaTrzyDniPrzed;
-    long double cenaDzienPrzed;
-    long double cenaDwaDniPrzed;
-    long double ilosc;
-    std::string skrot;
+    long double cena = 0;
+    unsigned int numer = 0;
+    long double cenaTrzyDniPrzed = 0;
+    long double cenaDzienPrzed = 0;
+    long double cenaDwaDniPrzed = 0;
+    long double ilosc = 0;
+    std::string skrot = "";
 public:
+	Akcje() = default;
     Akcje(long double cena, unsigned int numer, long double cena_dzien_przed, long double cena_dwa_dni_przed, long double ilosc, std::string skrot, long double cenaTrzyDniPrzed_)
         : cena(cena),
         numer(numer),
