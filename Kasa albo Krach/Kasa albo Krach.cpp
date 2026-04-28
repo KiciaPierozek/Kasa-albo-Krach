@@ -16,6 +16,6 @@
 int main() {
     std::setlocale(LC_ALL, "C.UTF-8");
     SetConsoleOutputCP(CP_UTF8);
-    Silnik silnik; // instantiate object (avoid most-vexing-parse)
+    Silnik silnik;
     silnik.start();
 }

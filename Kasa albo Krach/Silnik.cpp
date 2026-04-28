@@ -9,7 +9,7 @@
 long double Silnik::losujWspolczynnikZmianyCeny() {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
-	std::uniform_real_distribution<long double> dis(0.6, 1.4);
+	std::uniform_real_distribution<long double> dis(0.65, 1.45);
 	return dis(gen);
 }
 void Silnik::losujCenyAkcji(std::vector<Firma>& firma, long double q) {
@@ -43,7 +43,6 @@ void Silnik::losujOferteBanku(Bank& bank) {
 	bank.getKredyt().setStawkaKary(losujStawkeKary(bank));
 }
 void Silnik::start() {
-	srand(time(NULL));
 	Wyswietlacz wyswietlacz;
 	Kredyt kredytpeKO(0, 1, 2, 0);
 	wsulica = std::make_shared<Ulica>();
@@ -65,13 +64,13 @@ void Silnik::start() {
 	std::cin >> wybor;
 	switch(wybor) {
 	case 1:
-		startowaKasa = 1000;
+		startowaKasa = cel * 0.7;
 		break;
 	case 2:
-		startowaKasa = 500;
+		startowaKasa = cel * 0.4;
 		break;
 	case 3:
-		startowaKasa = 100;
+		startowaKasa = cel * 0.1;
 		break;
 	default:
 		std::cout << "Niepoprawny wybór, ustawiam poziom trudności na łatwy." << std::endl;
