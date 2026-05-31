@@ -2,15 +2,16 @@
 #include <string>
 #include "Placowka.h"
 #include "Akcje.h"
+class InterfejsWyswietlacza;
+class Gracz;
 class Firma : public Placowka
 {
 protected:
-    long double wartosc = 0;
-    float dywidendy = 0; //na jedna akcje
-    unsigned int iloscAkcji = 0;
-    Akcje& akcja;
+    long double wartosc;
+    float dywidendy; //na jedna akcje
+    unsigned int iloscAkcji;
+    Akcje akcja;
 public:
-	Firma() = default;
     Firma(const std::string& nazwa, long double wartosc, float dywidendy,
         unsigned int ilosc_akcji, Akcje akcja)
         : Placowka(nazwa),
@@ -19,10 +20,9 @@ public:
         iloscAkcji(ilosc_akcji),
         akcja(akcja) {
     }
-
-    std::string getNazwa() {
-        return nazwa;
-    }
+	std::string getNazwa() {
+		return nazwa;
+	}
     double long getWartosc() {
         return wartosc;
     }
@@ -32,8 +32,9 @@ public:
     unsigned int getIloscAkcji() {
         return iloscAkcji;
     }
-    Akcje getAkcja() {
+    Akcje& getAkcja() {
         return akcja;
     }
+    void wejdz(std::shared_ptr<InterfejsWyswietlacza> wyswietlacz, Gracz& gracz, int dni) const override;
 };
 

@@ -1,62 +1,63 @@
 #pragma once
-#include <iostream>
-#include <stdlib.h>
-#include <iomanip>
-#include "Akcje.h"
-#include "Firma.h"
-class Silnik;
-class Gracz;
+#include "InterfejsWyswietlacza.h"
+
+class Firma;
 class Bank;
-class Wyswietlacz
+class Gracz;
+
+class Wyswietlacz : public InterfejsWyswietlacza
 {
 public:
-    Wyswietlacz() {}
-    void ekranPowitalny();
-    void poczatekGry();
-    void uzueplnijDane1();
-	void uzueplnijDane2();
-    void wybierzPoziomTrudnosci();
-    void glowneMenu(Gracz& gracz, int dni); // pierwszy wybor, dom maklerski, bank itp.
-    void spytajOIlosc();
-    void niepoprawnyWybor();
-    void przespijSie();
-    //DOM MAKLERSKI
+    Wyswietlacz() = default;
+    ~Wyswietlacz() override = default;
 
-    void uMaklera();
-    void sprawdzNotowania();
-    void spytajOKtore();
-    void infoNotowanie(Firma& firma, long double cenaTrzyDni);
-    void zarzadzajAktywami(Gracz& gracz);
-    void Aktywo1(Gracz& gracz);
-    void Aktywo2(Gracz& gracz);
-    void sprzedajAktywo(Gracz& gracz);
-    void rozejrzyjSieMakler();
+    void ekranPowitalny() override;
+    void poczatekGry() override;
+    void uzueplnijDane1() override;
+    void uzueplnijDane2() override;
+    void wybierzPoziomTrudnosci() override;
+    void glowneMenu(Gracz& gracz, int dni) override;
+    void spytajOIlosc() override;
+    void niepoprawnyWybor() override;
+    void przespijSie() override;
 
-    //BANK
+    // DOM MAKLERSKI
+    void uMaklera() override;
+    void sprawdzNotowania() override;
+    void spytajOKtore() override;
+    void infoNotowanie(Firma& firma, long double cenaTrzyDni) override;
+    void zarzadzajAktywami(Gracz& gracz) override;
+    void Aktywo1(Gracz& gracz) override;
+    void Aktywo2(Gracz& gracz) override;
+    void sprzedajAktywo(Gracz& gracz) override;
+    void rozejrzyjSieMakler() override;
 
-    void wBanku();
-    void warunkiKredytu(Bank& bank);
-    void branieKredytu();
-    void zlaKwotaKredytu();
-    void nieMaszKredytu();
-	void odrzucKredyt();
-    void gratulacjeKredyt();
-    void gratulacjeSplacenie();
-    void splacanieKredytu(Bank& bank);
-    void infoSplacenie(Bank& bank, long double kwota);
-    void rozejrzyjSieBank();
+    // BANK
+    void wBanku() override;
+    void warunkiKredytu(Bank& bank) override;
+    void branieKredytu() override;
+    void zlaKwotaKredytu() override;
+    void nieMaszKredytu() override;
+    void odrzucKredyt() override;
+    void gratulacjeKredyt() override;
+    void gratulacjeSplacenie() override;
+    void splacanieKredytu(Gracz& gracz) override;
+    void infoSplacenie(Gracz& gracz, long double kwota) override;
+    void rozejrzyjSieBank() override;
+    void ponaglenie10Dni() override;
+    void ponaglenie5Dni() override;
+    void ponaglenie1Dzien() override;
+    void infoKwotaKredyt(Gracz& gracz) override;
+	void grozaKredytowa(Gracz& gracz) override;
 
-    //Kasyno
-
-    void wKasynie();
-    void wyborGry();
-    void stawka();
-    void blackJack();
-    void obstaw();
-    void ruletka();
-    void kasynoWygrana(long double wygrana);
-	void kasynoPrzegrana();
-    void rozejrzyjSieKasyno();
-
+    // KASYNO
+    void wKasynie() override;
+    void wyborGry() override;
+    void stawka() override;
+    void blackJack() override;
+    void obstaw() override;
+    void ruletka() override;
+    void kasynoWygrana(long double wygrana) override;
+    void kasynoPrzegrana() override;
+    void rozejrzyjSieKasyno() override;
 };
-

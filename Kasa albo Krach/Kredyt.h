@@ -1,5 +1,5 @@
 #pragma once
-#include "Gracz.h"
+class Gracz;
 class Kredyt
 {
     long double wartosc = 0;
@@ -10,7 +10,6 @@ public:
 	Kredyt() = default;
     Kredyt(double long wartosc, float oprocentowanie, int czas, float stawkaKary) : wartosc(wartosc), oprocentowanie(oprocentowanie), czas(czas), stawkaKary(stawkaKary) {}
     void splac(double kwota);
-    void pobierzKare(double stawka, Gracz& gracz);
     long double getWartosc() const {
         return wartosc;
 	}
@@ -34,6 +33,14 @@ public:
     }
     void setStawkaKary(float stawkaKary_) {
         this->stawkaKary = stawkaKary_;
+    }
+	void oprocentowanieDziennie() {
+		this->wartosc += this->wartosc * this->oprocentowanie;
+	}
+    void uplywDni() {
+        if (czas > 0) {
+            czas--;
+        }
     }
 };
 

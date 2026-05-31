@@ -138,6 +138,7 @@
     <ClCompile Include="Placowka.cpp" />
     <ClCompile Include="Silnik.cpp" />
     <ClCompile Include="Ulica.cpp" />
+    <ClCompile Include="WejscieKonsolowe.cpp" />
     <ClCompile Include="Wyswietlacz.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,11 +147,14 @@
     <ClInclude Include="DomMaklerski.h" />
     <ClInclude Include="Firma.h" />
     <ClInclude Include="Gracz.h" />
+    <ClInclude Include="InterfejsWejscia.h" />
     <ClInclude Include="Kasyno.h" />
     <ClInclude Include="Kredyt.h" />
+    <ClInclude Include="InterfejsWyswietlacza.h" />
     <ClInclude Include="Placowka.h" />
     <ClInclude Include="Silnik.h" />
     <ClInclude Include="Ulica.h" />
+    <ClInclude Include="WejscieKonsolowe.h" />
     <ClInclude Include="Wyswietlacz.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

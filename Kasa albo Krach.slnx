@@ -3,5 +3,36 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/naglowki/">
+    <File Path="Kasa albo Krach/Akcje.h" />
+    <File Path="Kasa albo Krach/Bank.h" />
+    <File Path="Kasa albo Krach/DomMaklerski.h" />
+    <File Path="Kasa albo Krach/Firma.h" />
+    <File Path="Kasa albo Krach/Gracz.h" />
+    <File Path="Kasa albo Krach/InterfejsWyswietlacza.h" />
+    <File Path="Kasa albo Krach/Kasyno.h" />
+    <File Path="Kasa albo Krach/Kredyt.h" />
+    <File Path="Kasa albo Krach/Placowka.h" />
+    <File Path="Kasa albo Krach/Silnik.h" />
+    <File Path="Kasa albo Krach/Ulica.h" />
+    <File Path="Kasa albo Krach/WejscieKonsolowe.h" />
+    <File Path="Kasa albo Krach/Wyswietlacz.h" />
+  </Folder>
+  <Folder Name="/zrodlowe/">
+    <File Path="Kasa albo Krach/Akcje.cpp" />
+    <File Path="Kasa albo Krach/Bank.cpp" />
+    <File Path="Kasa albo Krach/DomMaklerski.cpp" />
+    <File Path="Kasa albo Krach/Firma.cpp" />
+    <File Path="Kasa albo Krach/Gracz.cpp" />
+    <File Path="Kasa albo Krach/InterfejsWejscia.cpp" />
+    <File Path="Kasa albo Krach/Kasa albo Krach.cpp" />
+    <File Path="Kasa albo Krach/Kasyno.cpp" />
+    <File Path="Kasa albo Krach/Kredyt.cpp" />
+    <File Path="Kasa albo Krach/Placowka.cpp" />
+    <File Path="Kasa albo Krach/Silnik.cpp" />
+    <File Path="Kasa albo Krach/Ulica.cpp" />
+    <File Path="Kasa albo Krach/WejscieKonsolowe.cpp" />
+    <File Path="Kasa albo Krach/Wyswietlacz.cpp" />
+  </Folder>
   <Project Path="Kasa albo Krach/Kasa albo Krach.vcxproj" Id="ba787e58-d61f-42e2-a97e-32c6b2e6e76e" />
 </Solution>

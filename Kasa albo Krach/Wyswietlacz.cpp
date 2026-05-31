@@ -57,6 +57,9 @@ void Wyswietlacz::glowneMenu(Gracz& gracz, int dni) {
     std::cout << "1 Idź do domu maklerskiego | 2 Idź do banku | 3 Idź do kasyna | 4 prześpij się (pomija dzień)" << std::endl;
 }
 
+
+//------------------------------DOM MAKLERSKI---------------------------------------
+
 void Wyswietlacz::uMaklera() {
     system("CLS");
     std::cout << "W domu maklerskim..." << std::endl;
@@ -110,7 +113,9 @@ void Wyswietlacz::zarzadzajAktywami(Gracz& gracz) {
 void Wyswietlacz::Aktywo2(Gracz& gracz) {
     std::cout << "Ilość: " << std::endl;
 }
-
+void Wyswietlacz::Aktywo1(Gracz& gracz) {
+    std::cout << "Ilość: " << std::endl;
+}
 void Wyswietlacz::sprzedajAktywo(Gracz& gracz) {
 	std::cout << "Ilość: " << std::endl;
 }
@@ -120,6 +125,8 @@ void Wyswietlacz::rozejrzyjSieMakler() {
     std::cout << "Wygląda jak dom maklerski." << std::endl;
 	system("pause");
 }
+
+//---------------------------------------BANK---------------------------------------
 
 void Wyswietlacz::wBanku() {
     system("CLS");
@@ -154,10 +161,10 @@ void Wyswietlacz::gratulacjeKredyt() {
     std::cout << "Gratulacje! Wziąłeś kredyt!" << std::endl;
 	system("pause");
 }
-void Wyswietlacz::splacanieKredytu(Bank& bank) {
+void Wyswietlacz::splacanieKredytu(Gracz& gracz) {
     system("CLS");
-    std::cout << "Dni pozostałe do spłaty: " << bank.getKredyt().getCzas() << std::endl;
-	std::cout << "Do spłacenia pozostało: " << bank.getKredyt().getWartosc() << std::endl;
+    std::cout << "Dni pozostałe do spłaty: " << gracz.getKredytGracza().getCzas() << std::endl;
+	std::cout << "Do spłacenia pozostało: " << gracz.getKredytGracza().getWartosc() << std::endl;
     std::cout << "Ile chcesz spłacić?: " << std::endl;
 }
 void Wyswietlacz::gratulacjeSplacenie() {
@@ -165,10 +172,10 @@ void Wyswietlacz::gratulacjeSplacenie() {
     std::cout << "Gratulacje, Spłaciłeś kredyt! Ciesz się wolnością (na razie)" << std::endl;
     system("pause");
 }
-void Wyswietlacz::infoSplacenie(Bank& bank, long double kwota) {
+void Wyswietlacz::infoSplacenie(Gracz& gracz, long double kwota) {
     system("CLS");
     std::cout << "Spłaciłeś " << kwota << std::endl;
-    std::cout << ". Pozostało do spłaty: " << bank.getKredyt().getWartosc() << std::endl;
+    std::cout << ". Pozostało do spłaty: " << gracz.getKredytGracza().getWartosc() << std::endl;
 	system("pause");
 }
 void Wyswietlacz::rozejrzyjSieBank() {
@@ -177,7 +184,43 @@ void Wyswietlacz::rozejrzyjSieBank() {
 	system("pause");
 }
 
+void Wyswietlacz::ponaglenie10Dni() {
+    system("cls");
+	std::cout << "Do spłacenia kredytu pozostało 10 dni! Spiesz się!" << std::endl;
+    system("pause");
+}
+void Wyswietlacz::ponaglenie5Dni() {
+    system("cls");
+	std::cout << "Do spłacenia kredytu pozostało 5 dni! Spiesz się!" << std::endl;
+    system("pause");
+}
+void Wyswietlacz::ponaglenie1Dzien() {
+    system("cls");
+	std::cout << "Do spłacenia kredytu pozostało 1 dzień! Spiesz się!" << std::endl;
+    system("pause");
+}
+void Wyswietlacz::infoKwotaKredyt(Gracz& gracz) {
+	system("cls");
+	std::cout << "Do spłacenia pozostało: " << std::fixed << std::setprecision(2) << gracz.getKredytGracza().getWartosc() << std::endl;
+	system("pause");
+}
 
+
+void Wyswietlacz::grozaKredytowa(Gracz& gracz) {
+	system("cls");
+	std::cout << "Nie spłaciłeś kredytu na czas! Czas wyciągnąć konsekwencje..." << std::endl;
+	system("pause");
+	std::cout << "Kara za nieterminową spłatę: " << std::fixed << std::setprecision(2) << gracz.getKredytGracza().getStawkaKary() * 100 << "%" << std::endl;
+	system("pause");
+	std::cout << "Zostało do spłaty: " << gracz.getKredytGracza().getWartosc() << std::endl;
+	system("pause");
+	std::cout << "Łącznie wychodzi: " << std::fixed << std::setprecision(2) << gracz.getKredytGracza().getWartosc() * (1.0L + gracz.getKredytGracza().getStawkaKary()) << std::endl;
+	system("pause");
+	std::cout << "Bank peKO pozdrawia i życzy sukcesów inwestycyjnych w przyszłości!" << std::endl;
+	system("pause");
+}
+
+//------------------------------KASYNO---------------------------------------
 
 void Wyswietlacz::wKasynie() {
     system("CLS");

@@ -7,7 +7,8 @@
 #define SYMULATORGIELDY_PLACOWKA_H
 #include <string>
 #include "Gracz.h"
-class Wyswietlacz;
+#include <memory>
+class InterfejsWyswietlacza;
 class Gracz;
 class Placowka {
 protected:
@@ -17,7 +18,7 @@ public:
 	Placowka() = default;
     Placowka(std::string nazwa)
         : nazwa(nazwa) {}
-    virtual void wejdz(Wyswietlacz& wyswietlacz, Gracz& gracz, int dni) const = 0;
+    virtual void wejdz(std::shared_ptr<InterfejsWyswietlacza> wyswietlacz, Gracz& gracz, int dni) const = 0;
 	virtual ~Placowka() {}
 };
 #endif //SYMULATORGIELDY_PLACOWKA_H

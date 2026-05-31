@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Akcje.h"
+#include "Kredyt.h"
 class Gracz
 {
 private:
@@ -10,10 +11,11 @@ private:
     std::string nazwaGracza = "";
     int cel = 0;
     std::vector<Akcje> posiadaneAkcje;
+    Kredyt kredytGracza;
 public:
     Gracz() : kapital(0), srodki(0), nazwaGracza(""), cel(0), posiadaneAkcje() {}
 
-    Gracz(long double kapital, long double srodki, std::string nazwa, unsigned int cel)
+    Gracz(long double kapital, long double srodki, std::string nazwa, int cel)
         : kapital(kapital), srodki(srodki), cel(cel), nazwaGracza(nazwa) {
     }
 
@@ -39,6 +41,12 @@ public:
     }
     std::vector<Akcje> getPosiadaneAkcje() const {
         return posiadaneAkcje;
+	}
+	Kredyt& getKredytGracza() {
+		return kredytGracza;
+	}
+	void setKredytGracza(const Kredyt& kredyt) {
+		this->kredytGracza = kredyt;
 	}
 };
 

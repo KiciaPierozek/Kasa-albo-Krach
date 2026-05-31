@@ -7,6 +7,9 @@
 #include "Placowka.h"
 
 class Kasyno : public Placowka {
+
+public:
+	void wejdz(std::shared_ptr<InterfejsWyswietlacza> wyswietlacz, Gracz& gracz, int dni) const override;
 };
 
 
