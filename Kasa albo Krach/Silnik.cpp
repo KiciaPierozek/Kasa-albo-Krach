@@ -141,8 +141,8 @@ void Silnik::start() {
 		Firma Mikromiekki("Mikromiękki", 12000000000000, 3.33, 7389162561, Akcje(1624, 2, 1624, 1624, 0, "MKMK", 1624));
 		Firma Googol("Googol", 17000000000000, 0.8, 12454212454, Akcje(1365, 3, 1365, 1365, 0, "GOOGL", 1365));
 		Firma TrumpDonalds("TrumpDonalds", 720000000000, 6.75, 711462450, Akcje(1012, 4, 1012, 1012, 0, "TRPDLS", 1012));
-		Firma Smasnung("Smasnung", 201500000000000, 34.31, 10515603799, Akcje(19162, 5, 19162, 19162, 0, "SMSG", 19162));
-		Firma UniwersytetLodzki("Uniwersytet Łódzki", 1000000000, 10, 10000000, Akcje(100, 6, 100, 100, 0, "UL", 100));
+		Firma Smasnung("Smasnung", 2015000000000, 34.31, 10515603799, Akcje(19162, 5, 19162, 19162, 0, "SMSG", 19162));
+		Firma UniwersytetLodzki("Uniwersytet Łódzki", 1000000000000, 10, 10000000, Akcje(1000, 6, 1000, 800, 0, "UL", 1000));
 		Firma KukaKula("Kuka-Kula", 1000000000000, 1.93, 3424657534, Akcje(292, 7, 292, 292, 0, "KKL", 292));
 		Firma Poopsi("Poopsi", 706000000000, 5.38, 1368217054, Akcje(516, 8, 516, 516, 0, "PPSI", 516));
 		Firma Wiza("Wiza", 2000000000000, 2.42, 1699235344, Akcje(1177, 9, 1177, 1177, 0, "WZA", 1177));
@@ -185,8 +185,7 @@ void Silnik::start() {
 				startowaKasa = cel * 0.10;
 				break;
 			default:
-				std::cout << "Niepoprawny wybór, ustawiam poziom trudności na łatwy." << std::endl;
-				startowaKasa = 1000;
+				startowaKasa = cel * 0.70;
 				break;
 			};
 		}
@@ -293,8 +292,7 @@ void Silnik::wBanku() {
 		switch (wybor) {
 		case 1:
 			if (wKredycie) {
-				std::cout << "Już masz kredyt! Nie możesz wziąć kolejnego." << std::endl;
-				system("pause");
+				wyswietlacz->maszKredyt();
 				break;
 			}
 			wyswietlacz->warunkiKredytu(*wspeKO);
@@ -359,7 +357,7 @@ void Silnik::wDomuMaklerskim() {
 		wybor = wejscie->pobierzInt();
 		switch (wybor) {
 		case 1:
-			wyswietlacz->sprawdzNotowania(*firmy);
+			wyswietlacz->sprawdzNotowania1(*firmy);
 			wyswietlacz->spytajOKtore();
 			ktore = wejscie->pobierzInt();
 			if (ktore == iloscFirm) {
@@ -374,7 +372,7 @@ void Silnik::wDomuMaklerskim() {
 			wybor = wejscie->pobierzInt();
 
 			if (wybor == 1) {
-				wyswietlacz->sprawdzNotowania(*firmy);
+				wyswietlacz->sprawdzNotowania2(*firmy);
 				wyswietlacz->spytajOKtore();
 				ktore = wejscie->pobierzInt();
 
@@ -450,7 +448,6 @@ void Silnik::wKasynie() {
 		wybor = wejscie->pobierzInt();
 		switch (wybor) {
 		case 1:
-
 				wyswietlacz->wyborGry();
 				wybor = wejscie->pobierzInt();
 				if (wybor == 1) {
@@ -478,6 +475,9 @@ void Silnik::wKasynie() {
 							granie = wejscie->pobierzInt();
 						}
 					}
+				}
+				else if (wybor == 3) {
+					break;
 				}
 				else {
 					wyswietlacz->niepoprawnyWybor();

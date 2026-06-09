@@ -22,7 +22,8 @@ public:
 
     // DOM MAKLERSKI
     virtual void uMaklera() = 0;
-    virtual void sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) = 0;
+    virtual void sprawdzNotowania1(const std::vector<Firma>& wszystkieFirmy) = 0;
+    virtual void sprawdzNotowania2(const std::vector<Firma>& wszystkieFirmy) = 0;
     virtual void spytajOKtore() = 0;
     virtual void infoNotowanie(Firma& firma) = 0;
     virtual void zarzadzajAktywami(Gracz& gracz) = 0;
@@ -59,6 +60,7 @@ public:
 	virtual void ponaglenie1Dzien() = 0;
 	virtual void infoKwotaKredyt(Gracz& gracz) = 0;
 	virtual void grozaKredytowa(Gracz& gracz) = 0;
+	virtual void maszKredyt() = 0;
 
     // KASYNO
     virtual void wKasynie() = 0;

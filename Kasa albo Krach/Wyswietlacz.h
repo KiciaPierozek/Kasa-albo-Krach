@@ -23,7 +23,8 @@ public:
 
     // DOM MAKLERSKI
     void uMaklera() override;
-    void sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) override;
+    void sprawdzNotowania1(const std::vector<Firma>& wszystkieFirmy) override;
+    void sprawdzNotowania2(const std::vector<Firma>& wszystkieFirmy) override;
     void spytajOKtore() override;
     void infoNotowanie(Firma& firma) override;
     void zarzadzajAktywami(Gracz& gracz) override;
@@ -61,6 +62,7 @@ public:
     void ponaglenie1Dzien() override;
     void infoKwotaKredyt(Gracz& gracz) override;
 	void grozaKredytowa(Gracz& gracz) override;
+	void maszKredyt() override;
 
     // KASYNO
     void wKasynie() override;

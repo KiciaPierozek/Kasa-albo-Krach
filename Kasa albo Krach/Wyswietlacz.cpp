@@ -83,7 +83,7 @@ void Wyswietlacz::uMaklera() {
     std::cout << "1 Sprawdź notowania | 2 Zarządzaj aktywami | 3 Rozejrzyj się | 4 Wyjdź" << std::endl;
 }
 
-void Wyswietlacz::sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) {
+void Wyswietlacz::sprawdzNotowania1(const std::vector<Firma>& wszystkieFirmy) {
     std::cout << "Notowania:\n";
     int licznik = 1;
     for (size_t i = 0; i < wszystkieFirmy.size(); ++i) {
@@ -93,6 +93,15 @@ void Wyswietlacz::sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) {
     }
 	std::cout << "\t" << licznik << ". Wyświetl notowania z ostatniego dnia\n";
     std::cout << std::endl; 
+}
+void Wyswietlacz::sprawdzNotowania2(const std::vector<Firma>& wszystkieFirmy) {
+    std::cout << "Notowania:\n";
+    int licznik = 1;
+    for (size_t i = 0; i < wszystkieFirmy.size(); ++i) {
+        Firma firma = wszystkieFirmy[i];
+        std::cout << "\t" << i + 1 << ". " << firma.getAkcja().getSkrot() << "\n";
+        licznik++;
+    }
 }
 void Wyswietlacz::wyswietlOstatniDzien(std::vector<Firma>& wszystkieFirmy) {
     system("CLS");
@@ -188,6 +197,7 @@ void Wyswietlacz::akcjeSprzedane(long double ilosc) {
 
 void Wyswietlacz::usunietoAktywo() {
 	std::cout << "Usunięto firmę z Twojego portfela akcji." << std::endl;
+	system("pause >nul");
 }
 
 void Wyswietlacz::zarzadzajAktywami(Gracz& gracz) {
@@ -253,6 +263,10 @@ void Wyswietlacz::zlaKwotaKredytu() {
     std::cout << "Niepoprawna kwota." << std::endl;
     std::cout << "Spróbuj jeszcze raz" << std::endl;
 }
+void Wyswietlacz::maszKredyt() {
+    std::cout << "Już masz kredyt! Nie możesz wziąć kolejnego." << std::endl;
+    system("pause >nul");
+}
 void Wyswietlacz::nieMaszKredytu() {
     std::cout << "Nie masz kredytu do spłacenia!" << std::endl;
 	system("pause >nul");
@@ -275,7 +289,7 @@ void Wyswietlacz::gratulacjeSplacenie() {
 void Wyswietlacz::infoSplacenie(Gracz& gracz, long double kwota) {
     system("CLS");
     std::cout << "Spłaciłeś " << kwota << std::endl;
-    std::cout << ". Pozostało do spłaty: " << gracz.getKredytGracza().getWartosc() << std::endl;
+    std::cout << "Pozostało do spłaty: " << gracz.getKredytGracza().getWartosc() << std::endl;
 	system("pause >nul");
 }
 void Wyswietlacz::rozejrzyjSieBank() {
@@ -346,7 +360,7 @@ void Wyswietlacz::pokazStanGryBlackjack(const std::string& kartyKrupiera, const 
         std::cout << "Ty: " << kartyGracza << " (" << punktyGracza << " pkt)\n\n";
 }
 void Wyswietlacz::pokazWynikBlackjack(const std::string& kartyKrupiera, int pktKrupiera, const std::string& kartyGracza, int pktGracza, int rezultat) {
-    std::cout << "\n--- WYNIKI KONCOWE ---\n";
+    std::cout << "\n--- WYNIKI KOŃCOWE ---\n";
     std::cout << "Krupier: " << kartyKrupiera << " (" << pktKrupiera << " pkt)\n";
     std::cout << "Ty: " << kartyGracza << " (" << pktGracza << " pkt)\n\n";
 
@@ -373,7 +387,7 @@ void Wyswietlacz::wybierzJD() {
     std::cout << "Wybierz 1 lub 2: " << std::endl;
 }
 void Wyswietlacz::nieprawidlowyWyborKasyno() {
-    std::cout << "Nieprawidlowy wybor! Pieniadze wracaja na konto.\n";
+    std::cout << "Nieprawidłowy wybór! Pieniądze wracają na konto.\n";
 	system("pause >nul");
 }
 void Wyswietlacz::fura() {
