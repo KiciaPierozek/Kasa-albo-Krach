@@ -39,6 +39,9 @@ public:
     std::string getSkrot() {
         return skrot;
 	}
+    const std::string getSkrot() const {
+        return skrot;
+    }
     long double getIlosc() {
         return ilosc;
 	}
@@ -55,7 +58,7 @@ public:
     void setCenaTrzyDniPrzed(long double cena_) {
         this->cenaTrzyDniPrzed = cena_;
     }
-    void setIlosc(int ilosc_) {
+    void setIlosc(long double ilosc_) {
         this->ilosc = ilosc_;
 
     }

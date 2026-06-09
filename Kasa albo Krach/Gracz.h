@@ -39,7 +39,7 @@ public:
     int getCel() const {
         return cel;
     }
-    std::vector<Akcje> getPosiadaneAkcje() const {
+    std::vector<Akcje>& getPosiadaneAkcje() {
         return posiadaneAkcje;
 	}
 	Kredyt& getKredytGracza() {

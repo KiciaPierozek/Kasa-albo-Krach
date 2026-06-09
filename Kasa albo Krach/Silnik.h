@@ -31,18 +31,23 @@ private:
 public:
     Silnik() {}
     void glownaPetla();
-    void losujCenyAkcji(std::vector<Firma>& firma, long double q);
+    void liczKapital(Gracz& gracz);
+    void losujCenyAkcji(std::shared_ptr<std::vector<Firma>> firma, long double q);
     float losujOprocentowanie();
+    void aktualizujCenyWPortfelu(Gracz& gracz, const std::vector<Firma>& wszystkieFirmy);
     int losujCzasKredytu();
 	float losujStawkeKary(Bank& bank);
 	void losujOferteBanku(Bank& bank);
+    void wyplacDywidendy(Gracz& gracz, std::vector<Firma>& wszystkieFirmy);
 	long double losujWspolczynnikZmianyCeny();
 	void przespijSie();
+    void pobierzKosztyZycia(Gracz& gracz);
     void start();
     void naUlicy();
     void wBanku();
 	void wDomuMaklerskim();
     void wKasynie();
+    void kupAkcje(Gracz& gracz, Firma& firma, long double ilosc);
     int getDni() {
         return dni;
 	}

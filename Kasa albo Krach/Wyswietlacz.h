@@ -23,14 +23,25 @@ public:
 
     // DOM MAKLERSKI
     void uMaklera() override;
-    void sprawdzNotowania() override;
+    void sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) override;
     void spytajOKtore() override;
-    void infoNotowanie(Firma& firma, long double cenaTrzyDni) override;
+    void infoNotowanie(Firma& firma) override;
     void zarzadzajAktywami(Gracz& gracz) override;
     void Aktywo1(Gracz& gracz) override;
     void Aktywo2(Gracz& gracz) override;
-    void sprzedajAktywo(Gracz& gracz) override;
+    void sprzedajAktywo() override;
     void rozejrzyjSieMakler() override;
+    void sprawdzWalorGracza(Gracz& gracz, int ktore) override;
+    void nieprawidloweDane() override;
+	void kupionoAkcje(Firma firma, long double ilosc) override;
+	void brakAkcjiNumer() override;
+	void brakTyleAkcji() override;
+	void brakSrodkow() override;
+	void akcjeSprzedane(long double ilosc) override;
+	void nieMaszAkcji() override;
+    void usunietoAktywo() override;
+	void kosztyZycia(int jedzenie, int mieszkanie) override;
+	void otrzymanoDywidendy(long double calkowitaDywidenda) override;
 
     // BANK
     void wBanku() override;

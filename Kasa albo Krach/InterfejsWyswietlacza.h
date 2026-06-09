@@ -1,5 +1,5 @@
 #pragma once
-
+#include <vector>
 class Gracz;
 class Firma;
 class Bank;
@@ -17,17 +17,28 @@ public:
     virtual void spytajOIlosc() = 0;
     virtual void niepoprawnyWybor() = 0;
     virtual void przespijSie() = 0;
+	virtual void sprawdzWalorGracza(Gracz& gracz, int ktore) = 0;
 
     // DOM MAKLERSKI
     virtual void uMaklera() = 0;
-    virtual void sprawdzNotowania() = 0;
+    virtual void sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) = 0;
     virtual void spytajOKtore() = 0;
-    virtual void infoNotowanie(Firma& firma, long double cenaTrzyDni) = 0;
+    virtual void infoNotowanie(Firma& firma) = 0;
     virtual void zarzadzajAktywami(Gracz& gracz) = 0;
     virtual void Aktywo1(Gracz& gracz) = 0;
     virtual void Aktywo2(Gracz& gracz) = 0;
-    virtual void sprzedajAktywo(Gracz& gracz) = 0;
+    virtual void sprzedajAktywo() = 0;
     virtual void rozejrzyjSieMakler() = 0;
+    virtual void nieprawidloweDane() = 0;
+    virtual void kupionoAkcje(Firma firma, long double ilosc) = 0;
+    virtual void brakAkcjiNumer() = 0;
+    virtual void brakTyleAkcji() = 0;
+	virtual void brakSrodkow() = 0;
+	virtual void akcjeSprzedane(long double ilosc) = 0;
+	virtual void usunietoAktywo() = 0;
+    virtual void nieMaszAkcji() = 0;
+	virtual void kosztyZycia(int jedzenie, int mieszkanie) = 0;
+    virtual void otrzymanoDywidendy(long double calkowitaDywidenda) = 0;
 
     // BANK
     virtual void wBanku() = 0;

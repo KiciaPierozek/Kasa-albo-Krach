@@ -51,12 +51,18 @@ void Wyswietlacz::wybierzPoziomTrudnosci() {
 }
 void Wyswietlacz::glowneMenu(Gracz& gracz, int dni) {
     system("CLS");
-    std::cout << "Kapitał: " << gracz.getKapital() << "\t\t\t\t\t Dzień: " << dni << std::endl;
-    std::cout << "Środki: " << gracz.getSrodki() << std::endl;
+    std::cout << gracz.getNazwaGracza() << std::endl;
+    std::cout << "Kapitał: " << std::fixed << std::setprecision(10) << gracz.getKapital() << "\t\t\t\t\t Dzień: " << dni << std::endl;
+    std::cout << "Środki: " << std::fixed << std::setprecision(10) << gracz.getSrodki() << std::endl;
     std::cout << "Co chcesz zrobić? " << std::endl;
     std::cout << "1 Idź do domu maklerskiego | 2 Idź do banku | 3 Idź do kasyna | 4 prześpij się (pomija dzień)" << std::endl;
 }
 
+void Wyswietlacz::otrzymanoDywidendy(long double calkowitaDywidenda) {
+	std::cout << "Otrzymałeś dywidendy w wysokości: " << calkowitaDywidenda << std::endl;
+    std::cout << "Gratulacje!" << std::endl;
+	system("pause");
+}
 
 //------------------------------DOM MAKLERSKI---------------------------------------
 
@@ -67,20 +73,15 @@ void Wyswietlacz::uMaklera() {
     std::cout << "1 Sprawdź notowania | 2 Zarządzaj aktywami | 3 Rozejrzyj się | 4 Wyjdź" << std::endl;
 }
 
-void Wyswietlacz::sprawdzNotowania() {
-    std::cout << "Notowania: " << std::endl;
-    std::cout << "\t 1.  PAR" << std::endl;
-    std::cout << "\t 2.  MKMK" << std::endl;
-    std::cout << "\t 3.  GOGL" << std::endl;
-    std::cout << "\t 4.  TRDM" << std::endl;
-    std::cout << "\t 5.  KBC" << std::endl;
-    std::cout << "\t 6.  SMSG" << std::endl;
-    std::cout << "\t 7.  UŁ" << std::endl;
-    std::cout << "\t 8.  KUKA" << std::endl;
-    std::cout << "\t 9.  PPSI" << std::endl;
-    std::cout << "\t 10. WZA" << std::endl;
-    std::cout << "\t 11. PCKA" << std::endl;
-    std::cout << "\t 12. MRSD" << std::endl;
+void Wyswietlacz::sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) {
+    std::cout << "Notowania:\n";
+
+    for (size_t i = 0; i < wszystkieFirmy.size(); ++i) {
+        Firma firma = wszystkieFirmy[i];
+        std::cout << "\t" << i + 1 << ". " << firma.getAkcja().getSkrot() << "\n";
+    }
+
+    std::cout << std::endl; 
 }
 void Wyswietlacz::spytajOKtore() {
     std::cout << "Której spółki? (Podaj numer)" << std::endl;
@@ -96,19 +97,85 @@ void Wyswietlacz::przespijSie() {
     std::cout << "Przespałeś się i minął kolejny dzień." << std::endl;
 	system("pause");
 }
-void Wyswietlacz::infoNotowanie(Firma& firma, long double cenaTrzyDni) {
+
+void Wyswietlacz::kosztyZycia(int jedzenie, int mieszkanie) {
+	std::cout << "Koszty życia: " << std::endl;
+	std::cout << "Jedzenie: " << jedzenie << std::endl;
+	std::cout << "Mieszkanie: " << mieszkanie << std::endl;
+	system("pause");
+}
+void Wyswietlacz::infoNotowanie(Firma& firma) {
+    auto& akcja = firma.getAkcja();
+    std::cout << std::endl;
     std::cout << firma.getNazwa() << " :" << std::endl;
-    std::cout << "2 dni temu: " << firma.getAkcja().getCenaDwaDniPrzed() << " Różnica: " << ((firma.getAkcja().getCenaDwaDniPrzed()/cenaTrzyDni)-1)*100 << "%" << std::endl;
-    std::cout << "1 dzień temu: " << firma.getAkcja().getCenaDzienPrzed() << " Różnica: " << ((firma.getAkcja().getCenaDzienPrzed()/firma.getAkcja().getCenaDzienPrzed())-1)*100 << "%" << std::endl;
-    std::cout << "Dzisiaj: " << firma.getAkcja().getCena() << " Różnica: "<< std::showpos <<  ((firma.getAkcja().getCena()/firma.getAkcja().getCenaDzienPrzed())-1)*100 << std::noshowpos << "%" << std::endl;
+    long double roznica2DniTemu = ((akcja.getCenaDwaDniPrzed() / akcja.getCenaTrzyDniPrzed()) - 1) * 100;
+    long double roznica1DzienTemu = ((akcja.getCenaDzienPrzed() / akcja.getCenaDwaDniPrzed()) - 1) * 100;
+    long double roznicaDzisiaj = ((akcja.getCena() / akcja.getCenaDzienPrzed()) - 1) * 100;
+    std::cout << "2 dni temu: " << firma.getAkcja().getCenaDwaDniPrzed() << " Różnica: " << roznica2DniTemu << "%" << std::endl;
+    std::cout << "1 dzień temu: " << firma.getAkcja().getCenaDzienPrzed() << " Różnica: " << roznica1DzienTemu << "%" << std::endl;
+    std::cout << "Dzisiaj: " << firma.getAkcja().getCena() << " Różnica: "<< std::showpos <<  roznicaDzisiaj << std::noshowpos << "%" << std::endl;
+	system("pause");
+}
+
+void Wyswietlacz::nieprawidloweDane() {
+    std::cout << "Podano nieprawidłowe dane!" << std::endl;
+    system("pause");
+}
+
+void Wyswietlacz::kupionoAkcje(Firma firma, long double ilosc){
+    std::cout << "Kupiono " << ilosc << " akcji firmy " << firma.getNazwa() << std::endl;
+	system("pause");
+}
+
+void Wyswietlacz::brakAkcjiNumer() {
+	std::cout << "Nie masz akcji o podanym numerze!" << std::endl;
+	system("pause");
+}
+
+void Wyswietlacz::brakTyleAkcji() {
+	std::cout << "Nie masz tyle akcji!" << std::endl;
+	system("pause");
+}
+
+
+void Wyswietlacz::nieMaszAkcji() {
+    std::cout << "Nie posiadasz żadnych akcji :<" << std::endl;
+    system("pause");
+}
+
+void Wyswietlacz::brakSrodkow() {
+	std::cout << "Nie masz wystarczających środków!" << std::endl;
+	system("pause");
+}
+
+void Wyswietlacz::akcjeSprzedane(long double ilosc) {
+	std::cout << "Sprzedano " << ilosc << " akcji firmy "  << std::endl;
+	system("pause");
+}
+
+void Wyswietlacz::usunietoAktywo() {
+	std::cout << "Usunięto firmę z Twojego portfela akcji." << std::endl;
 }
 
 void Wyswietlacz::zarzadzajAktywami(Gracz& gracz) {
-	for (int i = 0; i < gracz.getPosiadaneAkcje().size(); i++) {
-		std::cout << gracz.getPosiadaneAkcje()[i].getSkrot() << ": " << gracz.getPosiadaneAkcje()[i].getIlosc() << " szt. Cena: " << gracz.getPosiadaneAkcje()[i].getCena() * gracz.getPosiadaneAkcje()[i].getIlosc() << std::endl;
+    if (gracz.getPosiadaneAkcje().empty()) {
+        nieMaszAkcji();
+    }
+    else {
+        std::cout << "Twoje aktywa: " << std::endl;
+        for (int i = 0; i < gracz.getPosiadaneAkcje().size(); i++) {
+            std::cout << i + 1 << ". " << gracz.getPosiadaneAkcje()[i].getSkrot() << std::endl;
+        }
     }
     std::cout << "Co chcesz zrobić?" << std::endl;
     std::cout << "1 Kup aktywo | 2 Sprzedaj aktywo | 3 Rozejrzyj się | 4 Wyjdź" << std::endl;
+}
+void Wyswietlacz::sprawdzWalorGracza(Gracz& gracz, int ktore) {
+    std::cout << "Informacje o posiadanym walorze: " << std::endl;
+    std::cout << "Skrót: " << gracz.getPosiadaneAkcje()[ktore-1].getSkrot() << std::endl;
+    std::cout << "Ilość: " << gracz.getPosiadaneAkcje()[ktore-1].getIlosc() << std::endl;
+    std::cout << "Cena: " << gracz.getPosiadaneAkcje()[ktore-1].getCena() << std::endl;
+	std::cout << "Wartość: " << gracz.getPosiadaneAkcje()[ktore - 1].getCena() * gracz.getPosiadaneAkcje()[ktore - 1].getIlosc() << std::endl;
 }
 void Wyswietlacz::Aktywo2(Gracz& gracz) {
     std::cout << "Ilość: " << std::endl;
@@ -116,7 +183,7 @@ void Wyswietlacz::Aktywo2(Gracz& gracz) {
 void Wyswietlacz::Aktywo1(Gracz& gracz) {
     std::cout << "Ilość: " << std::endl;
 }
-void Wyswietlacz::sprzedajAktywo(Gracz& gracz) {
+void Wyswietlacz::sprzedajAktywo() {
 	std::cout << "Ilość: " << std::endl;
 }
 

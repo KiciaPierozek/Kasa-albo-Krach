@@ -35,6 +35,10 @@ public:
     Akcje& getAkcja() {
         return akcja;
     }
+    const Akcje& getAkcja() const {
+        return akcja;
+    }
+
     void wejdz(std::shared_ptr<InterfejsWyswietlacza> wyswietlacz, Gracz& gracz, int dni) const override;
 };
 
