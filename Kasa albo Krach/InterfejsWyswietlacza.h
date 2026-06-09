@@ -40,6 +40,7 @@ public:
     virtual void nieMaszAkcji() = 0;
 	virtual void kosztyZycia(int jedzenie, int mieszkanie) = 0;
     virtual void otrzymanoDywidendy(long double calkowitaDywidenda) = 0;
+	virtual void wyswietlOstatniDzien(std::vector<Firma>& wszystkieFirmy) = 0;
 
     // BANK
     virtual void wBanku() = 0;
@@ -73,6 +74,13 @@ public:
 	virtual void wybierzKarte() = 0;
     virtual void pokazMenuRuletki() = 0;
     virtual void pokazWynikRuletki(int wylosowanaLiczba, const std::string& kolor, long double wygranaKwota, long double stawka) = 0;
+    virtual void chceszZagracPonownie() = 0;
+	virtual void podajLiczbe() = 0;
+	virtual void nieMaLiczby() = 0;
+	virtual void czerwonyCzarny() = 0;
+	virtual void parzysteNieparzyste() = 0;
+	virtual void wybierzJD() = 0;
+	virtual void nieprawidlowyWyborKasyno() = 0;
 
     //INNE
     virtual void WYGRANA(int dni) = 0;

@@ -42,6 +42,7 @@ public:
     void usunietoAktywo() override;
 	void kosztyZycia(int jedzenie, int mieszkanie) override;
 	void otrzymanoDywidendy(long double calkowitaDywidenda) override;
+	void wyswietlOstatniDzien(std::vector<Firma>& wszystkieFirmy) override;
 
     // BANK
     void wBanku() override;
@@ -75,6 +76,14 @@ public:
 	void wybierzKarte() override;
     void pokazMenuRuletki() override;
     void pokazWynikRuletki(int wylosowanaLiczba, const std::string& kolor, long double wygranaKwota, long double stawka) override;
+	void chceszZagracPonownie() override;
+	void podajLiczbe() override;
+	void nieMaLiczby() override;
+	void czerwonyCzarny() override;
+	void parzysteNieparzyste() override;
+	void wybierzJD() override;
+	void nieprawidlowyWyborKasyno() override;
+    
 
     //INNE
     void WYGRANA(int dni) override;

@@ -352,6 +352,7 @@ void Silnik::wDomuMaklerskim() {
 	int wybor;
 	int ktore;
 	long double ilosc;
+	int iloscFirm = firmy->size() + 1;
 	Firma* temp;
 	while (!wyjscie) {
 		wyswietlacz->uMaklera();
@@ -361,6 +362,10 @@ void Silnik::wDomuMaklerskim() {
 			wyswietlacz->sprawdzNotowania(*firmy);
 			wyswietlacz->spytajOKtore();
 			ktore = wejscie->pobierzInt();
+			if (ktore == iloscFirm) {
+				wyswietlacz->wyswietlOstatniDzien(*firmy);
+				break;
+			}
 			temp = &(*firmy)[ktore - 1];
 			wyswietlacz->infoNotowanie(*temp);
 			break;
@@ -437,6 +442,7 @@ void Silnik::wDomuMaklerskim() {
 
 void Silnik::wKasynie() {
 	bool wyjscie = false;
+	int granie = 1;
 	int wybor;
 	long double stawka;
 	while (!wyjscie) {
@@ -444,21 +450,38 @@ void Silnik::wKasynie() {
 		wybor = wejscie->pobierzInt();
 		switch (wybor) {
 		case 1:
-			wyswietlacz->wyborGry();
-			wybor = wejscie->pobierzInt();
-			if (wybor == 1) {
-				wyswietlacz->stawka();
-				stawka = wejscie->pobierzLongDouble();
-				wskasyno->blackJack(gracz, stawka, wejscie, wyswietlacz);
-			}
-			else if (wybor == 2) {
-				wyswietlacz->stawka();
-				stawka = wejscie->pobierzLongDouble();
-				wskasyno->zagrajWRuletke(gracz, stawka, wejscie, wyswietlacz);
-			}
-			else {
-				wyswietlacz->niepoprawnyWybor();
-			}
+
+				wyswietlacz->wyborGry();
+				wybor = wejscie->pobierzInt();
+				if (wybor == 1) {
+					wyswietlacz->stawka();
+					stawka = wejscie->pobierzLongDouble();
+					while (granie == 1) {
+						wskasyno->blackJack(gracz, stawka, wejscie, wyswietlacz);
+						wyswietlacz->chceszZagracPonownie();
+						granie = wejscie->pobierzInt();
+						while (granie != 1 && granie != 2) {
+							wyswietlacz->niepoprawnyWybor();
+							granie = wejscie->pobierzInt();
+						}
+					}
+				}
+				else if (wybor == 2) {
+					wyswietlacz->stawka();
+					stawka = wejscie->pobierzLongDouble();
+					while (granie == 1) {
+						wskasyno->zagrajWRuletke(gracz, stawka, wejscie, wyswietlacz);
+						wyswietlacz->chceszZagracPonownie();
+						granie = wejscie->pobierzInt();
+						while (granie != 1 && granie != 2) {
+							wyswietlacz->niepoprawnyWybor();
+							granie = wejscie->pobierzInt();
+						}
+					}
+				}
+				else {
+					wyswietlacz->niepoprawnyWybor();
+				}
 			break;
 		case 2:
 			wyswietlacz->rozejrzyjSieKasyno();

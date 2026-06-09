@@ -10,6 +10,9 @@
 #include "Firma.h"
 void Wyswietlacz::ekranPowitalny() {
     std::cout << R"(
+
+
+
 $$\   $$\                                              $$\ $$\                       $$\   $$\                              $$\
 $$ | $$  |                                             $$ |$$ |                      $$ | $$  |                             $$ |
 $$ |$$  / $$$$$$\   $$$$$$$\  $$$$$$\         $$$$$$\  $$ |$$$$$$$\   $$$$$$\        $$ |$$  /  $$$$$$\  $$$$$$\   $$$$$$$\ $$$$$$$\
@@ -34,11 +37,11 @@ Piotr Mleczko 2026
 
 void Wyswietlacz::poczatekGry() {
     std::cout << "Nacisnij przycisk aby zagrać" << std::endl;
-    system("pause");
+    system("pause >nul");
     system("CLS");
 }
 void Wyswietlacz::uzueplnijDane1() {
-    std::cout << "Podaj nazwę gracza: " << std::endl;
+    std::cout << "Podaj imię: " << std::endl;
 }
 void Wyswietlacz::uzueplnijDane2() {
     system("CLS");
@@ -50,18 +53,25 @@ void Wyswietlacz::wybierzPoziomTrudnosci() {
 	std::cout << "1 Łatwy | 2 Średni | 3 Trudny" << std::endl;
 }
 void Wyswietlacz::glowneMenu(Gracz& gracz, int dni) {
+
     system("CLS");
+
     std::cout << gracz.getNazwaGracza() << std::endl;
+
     std::cout << "Kapitał: " << std::fixed << std::setprecision(2) << gracz.getKapital() << "\t\t\t\t\t Dzień: " << dni << std::endl;
-    std::cout << "Środki: " << std::fixed << std::setprecision(2) << gracz.getSrodki() << std::endl;
+
+    std::cout << "Środki: " << std::fixed << std::setprecision(2) << gracz.getSrodki() << " " << "\t\t\t\t\tCel: " << gracz.getCel() << std::endl;
+
     std::cout << "Co chcesz zrobić? " << std::endl;
-    std::cout << "1 Idź do domu maklerskiego | 2 Idź do banku | 3 Idź do kasyna | 4 prześpij się (pomija dzień)" << std::endl;
+
+    std::cout << "1 Idź do domu maklerskiego | 2 Idź do banku | 3 Idź do kasyna | 4 Prześpij się (pomija dzień)" << std::endl;
+
 }
 
 void Wyswietlacz::otrzymanoDywidendy(long double calkowitaDywidenda) {
 	std::cout << "Otrzymałeś dywidendy w wysokości: " << calkowitaDywidenda << std::endl;
     std::cout << "Gratulacje!" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 //------------------------------DOM MAKLERSKI---------------------------------------
@@ -75,13 +85,36 @@ void Wyswietlacz::uMaklera() {
 
 void Wyswietlacz::sprawdzNotowania(const std::vector<Firma>& wszystkieFirmy) {
     std::cout << "Notowania:\n";
-
+    int licznik = 1;
     for (size_t i = 0; i < wszystkieFirmy.size(); ++i) {
         Firma firma = wszystkieFirmy[i];
         std::cout << "\t" << i + 1 << ". " << firma.getAkcja().getSkrot() << "\n";
+        licznik++;
+    }
+	std::cout << "\t" << licznik << ". Wyświetl notowania z ostatniego dnia\n";
+    std::cout << std::endl; 
+}
+void Wyswietlacz::wyswietlOstatniDzien(std::vector<Firma>& wszystkieFirmy) {
+    system("CLS");
+    std::cout << "=========================================================================\n";
+    std::cout << "                      AKTUALNE NOTOWANIA GIEŁDOWE                        \n";
+    std::cout << "=========================================================================\n";
+
+    std::cout << std::left << std::setw(25) << "Nazwa firmy"
+        << std::setw(12) << "Skrot"
+        << "Aktualna cena akcji" << "\n";
+    std::cout << "-------------------------------------------------------------------------\n";
+
+    for (size_t i = 0; i < wszystkieFirmy.size(); ++i) {
+        Firma& firma = wszystkieFirmy[i];
+
+        std::cout << std::left << std::setw(25) << firma.getNazwa()
+            << std::setw(12) << firma.getAkcja().getSkrot()
+            << std::fixed << std::setprecision(2) << firma.getAkcja().getCena() << "\n";
     }
 
-    std::cout << std::endl; 
+    std::cout << "=========================================================================\n";
+    system("pause >nul");
 }
 void Wyswietlacz::spytajOKtore() {
     std::cout << "Której spółki? (Podaj numer)" << std::endl;
@@ -95,14 +128,14 @@ void Wyswietlacz::niepoprawnyWybor() {
 void Wyswietlacz::przespijSie() {
 	system("CLS");
     std::cout << "Przespałeś się i minął kolejny dzień." << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::kosztyZycia(int jedzenie, int mieszkanie) {
 	std::cout << "Koszty życia: " << std::endl;
 	std::cout << "Jedzenie: " << jedzenie << std::endl;
 	std::cout << "Mieszkanie: " << mieszkanie << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 void Wyswietlacz::infoNotowanie(Firma& firma) {
     auto& akcja = firma.getAkcja();
@@ -114,43 +147,43 @@ void Wyswietlacz::infoNotowanie(Firma& firma) {
     std::cout << "2 dni temu: " << firma.getAkcja().getCenaDwaDniPrzed() << " Różnica: " << std::showpos << roznica2DniTemu << "%" << std::endl;
     std::cout << "1 dzień temu: " << firma.getAkcja().getCenaDzienPrzed() << " Różnica: " << std::showpos << roznica1DzienTemu << "%" << std::endl;
     std::cout << "Dzisiaj: " << firma.getAkcja().getCena() << " Różnica: "<< std::showpos <<  roznicaDzisiaj << std::noshowpos << "%" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::nieprawidloweDane() {
     std::cout << "Podano nieprawidłowe dane!" << std::endl;
-    system("pause");
+    system("pause >nul");
 }
 
 void Wyswietlacz::kupionoAkcje(Firma firma, long double ilosc){
     std::cout << "Kupiono " << ilosc << " akcji firmy " << firma.getNazwa() << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::brakAkcjiNumer() {
 	std::cout << "Nie masz akcji o podanym numerze!" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::brakTyleAkcji() {
 	std::cout << "Nie masz tyle akcji!" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 
 void Wyswietlacz::nieMaszAkcji() {
     std::cout << "Nie posiadasz żadnych akcji :<" << std::endl;
-    system("pause");
+    system("pause >nul");
 }
 
 void Wyswietlacz::brakSrodkow() {
 	std::cout << "Nie masz wystarczających środków!" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::akcjeSprzedane(long double ilosc) {
 	std::cout << "Sprzedano " << ilosc << " akcji firmy "  << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::usunietoAktywo() {
@@ -190,7 +223,7 @@ void Wyswietlacz::sprzedajAktywo() {
 void Wyswietlacz::rozejrzyjSieMakler() {
 	system("CLS");
     std::cout << "Wygląda jak dom maklerski." << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 //---------------------------------------BANK---------------------------------------
@@ -222,11 +255,11 @@ void Wyswietlacz::zlaKwotaKredytu() {
 }
 void Wyswietlacz::nieMaszKredytu() {
     std::cout << "Nie masz kredytu do spłacenia!" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 void Wyswietlacz::gratulacjeKredyt() {
     std::cout << "Gratulacje! Wziąłeś kredyt!" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 void Wyswietlacz::splacanieKredytu(Gracz& gracz) {
     system("CLS");
@@ -237,54 +270,54 @@ void Wyswietlacz::splacanieKredytu(Gracz& gracz) {
 void Wyswietlacz::gratulacjeSplacenie() {
     system("CLS");
     std::cout << "Gratulacje, Spłaciłeś kredyt! Ciesz się wolnością (na razie)" << std::endl;
-    system("pause");
+    system("pause >nul");
 }
 void Wyswietlacz::infoSplacenie(Gracz& gracz, long double kwota) {
     system("CLS");
     std::cout << "Spłaciłeś " << kwota << std::endl;
     std::cout << ". Pozostało do spłaty: " << gracz.getKredytGracza().getWartosc() << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 void Wyswietlacz::rozejrzyjSieBank() {
     system("CLS");
     std::cout << "Wygląda jak bank." << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::ponaglenie10Dni() {
     system("cls");
 	std::cout << "Do spłacenia kredytu pozostało 10 dni! Spiesz się!" << std::endl;
-    system("pause");
+    system("pause >nul");
 }
 void Wyswietlacz::ponaglenie5Dni() {
     system("cls");
 	std::cout << "Do spłacenia kredytu pozostało 5 dni! Spiesz się!" << std::endl;
-    system("pause");
+    system("pause >nul");
 }
 void Wyswietlacz::ponaglenie1Dzien() {
     system("cls");
 	std::cout << "Do spłacenia kredytu pozostało 1 dzień! Spiesz się!" << std::endl;
-    system("pause");
+    system("pause >nul");
 }
 void Wyswietlacz::infoKwotaKredyt(Gracz& gracz) {
 	system("cls");
 	std::cout << "Do spłacenia pozostało: " << std::fixed << std::setprecision(2) << gracz.getKredytGracza().getWartosc() << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 
 void Wyswietlacz::grozaKredytowa(Gracz& gracz) {
 	system("cls");
 	std::cout << "Nie spłaciłeś kredytu na czas! Czas wyciągnąć konsekwencje..." << std::endl;
-	system("pause");
+	system("pause >nul");
 	std::cout << "Kara za nieterminową spłatę: " << std::fixed << std::setprecision(2) << gracz.getKredytGracza().getStawkaKary() * 100 << "%" << std::endl;
-	system("pause");
+	system("pause >nul");
 	std::cout << "Zostało do spłaty: " << gracz.getKredytGracza().getWartosc() << std::endl;
-	system("pause");
+	system("pause >nul");
 	std::cout << "Łącznie wychodzi: " << std::fixed << std::setprecision(2) << gracz.getKredytGracza().getWartosc() * (1.0L + gracz.getKredytGracza().getStawkaKary()) << std::endl;
-	system("pause");
+	system("pause >nul");
 	std::cout << "Bank peKO pozdrawia i życzy sukcesów inwestycyjnych w przyszłości!" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 //------------------------------KASYNO---------------------------------------
@@ -297,7 +330,7 @@ void Wyswietlacz::wKasynie() {
 
 void Wyswietlacz::wyborGry() {
     system("CLS");
-    std::cout << "Jaką?:" << std::endl;
+    std::cout << "Którą grę wybierasz?:" << std::endl;
 	std::cout << "1 BlackJack | 2 Ruletka | 3 Jednak nie" << std::endl;
 }
 
@@ -324,6 +357,25 @@ void Wyswietlacz::pokazWynikBlackjack(const std::string& kartyKrupiera, int pktK
 void Wyswietlacz::nieMaszSrodkow() {
 	std::cout << "Nie masz wystarczajacych środków na grę!" << std::endl;
 }
+void Wyswietlacz::podajLiczbe() {
+	std::cout << "Podaj liczbę (0-36): " << std::endl;
+}
+void Wyswietlacz::nieMaLiczby() {
+    std::cout << "Nie ma takiej liczby na kole! Podaj od 0 do 36: " << std::endl;
+}
+void Wyswietlacz::czerwonyCzarny() {
+    std::cout << "1 - Czerwony | 2 - Czarny: " << std::endl;
+}
+void Wyswietlacz::parzysteNieparzyste() {
+	std::cout << "1 - Parzyste | 2 - Nieparzyste: " << std::endl;
+}
+void Wyswietlacz::wybierzJD() {
+    std::cout << "Wybierz 1 lub 2: " << std::endl;
+}
+void Wyswietlacz::nieprawidlowyWyborKasyno() {
+    std::cout << "Nieprawidlowy wybor! Pieniadze wracaja na konto.\n";
+	system("pause >nul");
+}
 void Wyswietlacz::fura() {
     std::cout << "Fura! Przekraczasz 21 punktów" << std::endl;
 }
@@ -334,39 +386,42 @@ void Wyswietlacz::wybierzKarte() {
 void Wyswietlacz::kasynoWygrana(long double wygrana) {
     system("CLS");
 	std::cout << "Gratulacje! Wygrałeś " << wygrana << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::kasynoPrzegrana() {
     system("CLS");
     std::cout << "Przegrałeś :<" << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 
 void Wyswietlacz::rozejrzyjSieKasyno() {
     system("CLS");
 	std::cout << "Wygląda jak kasyno." << std::endl;
-	system("pause");
+	system("pause >nul");
 }
 void Wyswietlacz::pokazMenuRuletki() {
     system("CLS");
     std::cout << "--- RULETKA ---\n";
-    std::cout << "Na co chcesz postawic swoje pieniadze?\n";
+    std::cout << "Na co chcesz postawić swoje pieniądze?\n";
     std::cout << "1 - Konkretna liczba (0-36) [Wygrana 36x]\n";
     std::cout << "2 - Kolor (Czerwony / Czarny) [Wygrana 2x]\n";
     std::cout << "3 - Parzyste / Nieparzyste [Wygrana 2x]\n";
     std::cout << "Wybor: ";
 }
 void Wyswietlacz::pokazWynikRuletki(int wylosowanaLiczba, const std::string& kolor, long double wygranaKwota, long double stawka) {
-    std::cout << "\nKrupier kreci kolem...\n";
-    std::cout << "Kulka skacze... i zatrzymuje sie na: " << wylosowanaLiczba << " [" << kolor << "]!\n\n";
+    std::cout << "\nKrupier kręci kołem...\n";
+    std::cout << "Kulka skacze... i zatrzymuje się na: " << wylosowanaLiczba << " [" << kolor << "]!\n\n";
 
     if (wygranaKwota > 0) {
         std::cout << "Gratulacje! Wygrywasz " << wygranaKwota << " zl!\n";
     }
     else {
-        std::cout << "Niestety! Przegrywasz swoja stawke (" << stawka << " zl).\n";
+        std::cout << "Niestety! Przegrywasz swoją stawkę (" << stawka << " zl).\n";
     }
+}
+void Wyswietlacz::chceszZagracPonownie() {
+	std::cout << "Chcesz zagrać ponownie? (1 - Tak, 2 - Nie)" << std::endl;
 }
 
 //------------------------------INNE---------------------------------------
@@ -376,7 +431,7 @@ void Wyswietlacz::WYGRANA(int dni) {
     std::cout << "Gratulacje! Wygrałeś grę!" << std::endl;
 	std::cout << "Udało Ci się to osiągnąć w: " << dni << " dni!" << std::endl;
 	std::cout << "Dziękuję za grę!" << std::endl;
-    system("pause");
+    system("pause >nul");
 }
 
 void Wyswietlacz::PRZEGRANA(int dni) {
@@ -384,5 +439,5 @@ void Wyswietlacz::PRZEGRANA(int dni) {
 	std::cout << "Niestety, zostałeś bankrutem :<" << std::endl;
 	std::cout << "Udało Ci się być rekinem giełdowym przez: " << dni << " dni!" << std::endl;
 	std::cout << "Powodzenia następnym razem!" << std::endl;
-    system("pause");
+    system("pause >nul");
 }

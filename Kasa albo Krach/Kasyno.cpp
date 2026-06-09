@@ -39,6 +39,9 @@ void Kasyno::blackJack(Gracz& gracz, long double stawka, std::shared_ptr<Interfe
         for (size_t i = 0; i < reka.size(); ++i) {
             if (i == 1 && ukrytaKarta) wynik += "X";
             else wynik += reka[i];
+            if (i < reka.size() - 1) {
+                wynik += " ";
+            }
         }
         return wynik;
         };
@@ -108,12 +111,12 @@ void Kasyno::blackJack(Gracz& gracz, long double stawka, std::shared_ptr<Interfe
         rezultat
     );
 
-    system("pause");
+    system("pause >nul");
 }
 
 void Kasyno::zagrajWRuletke(Gracz& gracz, long double stawka, std::shared_ptr<InterfejsWejscia> wejscie, std::shared_ptr<InterfejsWyswietlacza> wyswietlacz) {
     if (gracz.getSrodki() < stawka) {
-        std::cout << "Nie masz wystarczajacych srodkow na ten zaklad!\n";
+        wyswietlacz->nieMaszSrodkow();
         return;
     }
     gracz.setSrodki(gracz.getSrodki() - stawka);
@@ -140,33 +143,33 @@ void Kasyno::zagrajWRuletke(Gracz& gracz, long double stawka, std::shared_ptr<In
     int postawionaParzystosc = -1;
 
     if (typZakladu == 1) {
-        std::cout << "Podaj liczbe (0-36): ";
+        wyswietlacz->podajLiczbe();
         while (true) {
             postawionaLiczba = wejscie->pobierzInt();
             if (postawionaLiczba >= 0 && postawionaLiczba <= 36) break;
-            std::cout << "Nie ma takiej liczby na kole! Podaj od 0 do 36: ";
+            wyswietlacz->nieMaLiczby();
         }
     }
     else if (typZakladu == 2) {
-        std::cout << "1 - Czerwony | 2 - Czarny: ";
+        wyswietlacz->czerwonyCzarny();
         while (true) {
             postawionyKolor = wejscie->pobierzInt();
             if (postawionyKolor == 1 || postawionyKolor == 2) break;
-            std::cout << "Wybierz 1 lub 2: ";
+            wyswietlacz->wybierzJD();
         }
     }
     else if (typZakladu == 3) {
-        std::cout << "1 - Parzyste | 2 - Nieparzyste: ";
+        wyswietlacz->parzysteNieparzyste();
         while (true) {
             postawionaParzystosc = wejscie->pobierzInt();
             if (postawionaParzystosc == 1 || postawionaParzystosc == 2) break;
-            std::cout << "Wybierz 1 lub 2: ";
+            wyswietlacz->wybierzJD();
         }
     }
     else {
-        std::cout << "Nieprawidlowy wybor! Pieniadze wracaja na konto.\n";
+        wyswietlacz->nieprawidlowyWyborKasyno();
         gracz.setSrodki(gracz.getSrodki() + stawka);
-        system("pause");
+        system("pause >nul >nul");
         return;
     }
 
@@ -196,5 +199,5 @@ void Kasyno::zagrajWRuletke(Gracz& gracz, long double stawka, std::shared_ptr<In
     }
 
     wyswietlacz->pokazWynikRuletki(wylosowanaLiczba, wylosowanyKolor, wygrana, stawka);
-    system("pause");
+    system("pause >nul >nul");
 }
