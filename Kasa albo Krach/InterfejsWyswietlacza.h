@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 class Gracz;
 class Firma;
 class Bank;
@@ -62,10 +63,18 @@ public:
     virtual void wKasynie() = 0;
     virtual void wyborGry() = 0;
     virtual void stawka() = 0;
-    virtual void blackJack() = 0;
-    virtual void obstaw() = 0;
-    virtual void ruletka() = 0;
     virtual void kasynoWygrana(long double wygrana) = 0;
     virtual void kasynoPrzegrana() = 0;
     virtual void rozejrzyjSieKasyno() = 0;
+    virtual void pokazStanGryBlackjack(const std::string& kartyKrupiera, const std::string& kartyGracza, int punktyGracza) = 0;
+    virtual void pokazWynikBlackjack(const std::string& kartyKrupiera, int pktKrupiera, const std::string& kartyGracza, int pktGracza, int rezultat) = 0;
+	virtual void nieMaszSrodkow() = 0;
+	virtual void fura() = 0;
+	virtual void wybierzKarte() = 0;
+    virtual void pokazMenuRuletki() = 0;
+    virtual void pokazWynikRuletki(int wylosowanaLiczba, const std::string& kolor, long double wygranaKwota, long double stawka) = 0;
+
+    //INNE
+    virtual void WYGRANA(int dni) = 0;
+    virtual void PRZEGRANA(int dni) = 0;
 };

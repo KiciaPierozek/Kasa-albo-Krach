@@ -34,8 +34,10 @@ public:
     void setStawkaKary(float stawkaKary_) {
         this->stawkaKary = stawkaKary_;
     }
-	void oprocentowanieDziennie() {
-		this->wartosc += this->wartosc * this->oprocentowanie;
+	void oprocentowanieDziennie(int dni) {
+        if (dni % 3 == 0) {
+            this->wartosc += this->wartosc * this->oprocentowanie;
+        }
 	}
     void uplywDni() {
         if (czas > 0) {

@@ -3,6 +3,7 @@
 #include <string>
 #include <limits>
 #include <stdexcept>
+#include <sstream>
 
 int WejscieKonsolowe::pobierzInt() {
     std::string tekst;
@@ -46,37 +47,41 @@ long double WejscieKonsolowe::pobierzLongDouble() {
             continue;
         }
 
-        // 1. ANTY-FREEZE SHIELD: Jeśli tekst ma więcej niż 20 znaków, 
-        // odrzucamy go ręcznie, żeby std::stold nie zawiesił nam programu!
-        if (tekst.length() > 15) {
+        if (tekst.length() > 25) {
             std::cout << "Blad! Ta liczba jest zbyt potezna dla gieldy!\n";
             std::cout << "Sprobuj ponownie: ";
             continue;
         }
 
-        // 2. Szukamy czy gracz nie wpisał minusa gdzies na poczatku
-        if (tekst.find('-') != std::string::npos) {
-            std::cout << "Blad! Wartosc nie moze byc ujemna!\n";
-            std::cout << "Sprobuj ponownie: ";
-            continue;
+        for (char& c : tekst) {
+            if (c == ',') c = '.';
         }
 
-        try {
-            size_t przetworzoneZnakow;
-            wartosc = std::stold(tekst, &przetworzoneZnakow);
+        std::stringstream ss(tekst);
 
-            if (przetworzoneZnakow != tekst.length()) {
-                throw std::invalid_argument("Smieci w tekscie");
+        if (ss >> wartosc) {
+
+            std::string smieci;
+            if (ss >> smieci) {
+                std::cout << "Blad! Wpisano niedozwolone znaki (np. litery)!\n";
+                std::cout << "Sprobuj ponownie: ";
+                continue;
             }
 
-            break; // Jeśli liczba ma mniej niż 20 cyfr, std::stold wykona się natychmiast i bezpiecznie!
+            if (wartosc < 0) {
+                std::cout << "Blad! Wartosc nie moze byc ujemna!\n";
+                std::cout << "Sprobuj ponownie: ";
+                continue;
+            }
 
+            break;
         }
-        catch (...) {
+        else {
             std::cout << "Blad! To nie jest poprawna liczba!\n";
             std::cout << "Sprobuj ponownie: ";
         }
     }
+
     return wartosc;
 }
 

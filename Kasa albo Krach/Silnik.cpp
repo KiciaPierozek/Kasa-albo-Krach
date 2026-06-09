@@ -70,6 +70,7 @@ void Silnik::liczKapital(Gracz& gracz) {
 		Akcje& akcja = gracz.getPosiadaneAkcje()[i];
 		kapital += akcja.getIlosc() * akcja.getCena();
 	}
+	kapital -= gracz.getKredytGracza().getWartosc();
 	gracz.setKapital(kapital);
 }
 
@@ -120,73 +121,87 @@ void Silnik::wyplacDywidendy(Gracz& gracz, std::vector<Firma>& wszystkieFirmy) {
 
 void Silnik::start() {
 	//inicjalizacja firm
-	Firma Pear("Pear", 17000000000000, 0.97, 15084294587, Akcje(1127, 1, 1127, 1127, 0, "PR", 1127));
-	Firma Mikromiekki("Mikromiękki", 12000000000000, 3.33, 7389162561, Akcje(1624, 2, 1624, 1624, 0, "MKMK", 1624));
-	Firma Googol("Googol", 17000000000000, 0.8, 12454212454, Akcje(1365, 3, 1365, 1365, 0, "GOOGL", 1365));
-	Firma TrumpDonalds("TrumpDonalds", 720000000000, 6.75, 711462450, Akcje(1012, 4, 1012, 1012, 0, "TRPDLS", 1012));
-	Firma Smasnung("Smasnung", 201500000000000, 34.31, 10515603799, Akcje(19162, 5, 19162, 19162, 0, "SMSG", 19162));
-	Firma UniwersytetLodzki("Uniwersytet Łódzki", 1000000000, 10, 10000000, Akcje(100, 6, 100, 100, 0, "UL", 100));
-	Firma KukaKula("Kuka-Kula", 1000000000000, 1.93, 3424657534, Akcje(292, 7, 292, 292, 0, "KKL", 292));
-	Firma Poopsi("Poopsi", 706000000000, 5.38, 1368217054, Akcje(516, 8, 516, 516, 0, "PPSI", 516));
-	Firma Wiza("Wiza", 2000000000000, 2.42, 1699235344, Akcje(1177, 9, 1177, 1177, 0, "WZA", 1177));
-	Firma PlacKolezka("Płać Koleżka", 132000000000, 0.51, 874172185, Akcje(151, 10, 151, 151, 0, "PPL", 151));
-	Firma Mersidis("Mersidis", 196000000000, 5, 960784313, Akcje(204, 11, 204, 204, 0, "MRCDS", 204));
-	Firma PietraIndustries("Piętra Industries", 1000000000000, 6.07, 89371283, Akcje(670, 12, 670, 670, 0, "PIĘTRA", 670));
-	firmy->push_back(Pear);
-	firmy->push_back(Mikromiekki);
-	firmy->push_back(Googol);
-	firmy->push_back(TrumpDonalds);
-	firmy->push_back(Smasnung);
-	firmy->push_back(UniwersytetLodzki);
-	firmy->push_back(KukaKula);
-	firmy->push_back(Poopsi);
-	firmy->push_back(Wiza);
-	firmy->push_back(PlacKolezka);
-	firmy->push_back(Mersidis);
-	firmy->push_back(PietraIndustries);
 	wyswietlacz = std::make_shared<Wyswietlacz>();
 	wejscie = std::make_shared<WejscieKonsolowe>();
 	Kredyt kredytpeKO(0, 1, 2, 0);
 	wsulica = std::make_shared<Ulica>();
 	wspeKO = std::make_shared<Bank>("PeKO", 1, kredytpeKO);
 	wsgielda = std::make_shared<DomMaklerski>();
-	//wskasyno = std::make_shared<Kasyno>();
+	wskasyno = std::make_shared<Kasyno>();
 	lokacja = wsulica;
 	int wybor;
-	int startowaKasa = 0;
-	wyswietlacz->ekranPowitalny();
-	wyswietlacz->poczatekGry();
-	wyswietlacz->uzueplnijDane1();
-	std::string nazwa;
-	nazwa = wejscie->pobierzString();
-	wyswietlacz->uzueplnijDane2();
+	long double startowaKasa = 0;
 	long double cel;
-	cel = wejscie->pobierzLongDouble();
-	wyswietlacz->wybierzPoziomTrudnosci();
-	wybor = wejscie->pobierzInt();
-	switch(wybor) {
-	case 1:
-		startowaKasa = cel * 0.7;
-		break;
-	case 2:
-		startowaKasa = cel * 0.4;
-		break;
-	case 3:
-		startowaKasa = cel * 0.1;
-		break;
-	default:
-		std::cout << "Niepoprawny wybór, ustawiam poziom trudności na łatwy." << std::endl;
-		startowaKasa = 1000;
-		break;
-	};
-	this->gracz = Gracz(0, startowaKasa, nazwa, cel);
-	losujOferteBanku(*wspeKO);
-	glownaPetla();
+	bool granko = true;
+	std::string nazwa;
+	while (granko) {
+		dni = 1;
+		firmy->clear();
+		Firma Pear("Pear", 17000000000000, 0.97, 15084294587, Akcje(1127, 1, 1127, 1127, 0, "PR", 1127));
+		Firma Mikromiekki("Mikromiękki", 12000000000000, 3.33, 7389162561, Akcje(1624, 2, 1624, 1624, 0, "MKMK", 1624));
+		Firma Googol("Googol", 17000000000000, 0.8, 12454212454, Akcje(1365, 3, 1365, 1365, 0, "GOOGL", 1365));
+		Firma TrumpDonalds("TrumpDonalds", 720000000000, 6.75, 711462450, Akcje(1012, 4, 1012, 1012, 0, "TRPDLS", 1012));
+		Firma Smasnung("Smasnung", 201500000000000, 34.31, 10515603799, Akcje(19162, 5, 19162, 19162, 0, "SMSG", 19162));
+		Firma UniwersytetLodzki("Uniwersytet Łódzki", 1000000000, 10, 10000000, Akcje(100, 6, 100, 100, 0, "UL", 100));
+		Firma KukaKula("Kuka-Kula", 1000000000000, 1.93, 3424657534, Akcje(292, 7, 292, 292, 0, "KKL", 292));
+		Firma Poopsi("Poopsi", 706000000000, 5.38, 1368217054, Akcje(516, 8, 516, 516, 0, "PPSI", 516));
+		Firma Wiza("Wiza", 2000000000000, 2.42, 1699235344, Akcje(1177, 9, 1177, 1177, 0, "WZA", 1177));
+		Firma PlacKolezka("Płać Koleżka", 132000000000, 0.51, 874172185, Akcje(151, 10, 151, 151, 0, "PPL", 151));
+		Firma Mersidis("Mersidis", 196000000000, 5, 960784313, Akcje(204, 11, 204, 204, 0, "MRCDS", 204));
+		Firma PietraIndustries("Piętra Industries", 1000000000000, 6.07, 89371283, Akcje(670, 12, 670, 670, 0, "PIĘTRA", 670));
+		firmy->push_back(Pear);
+		firmy->push_back(Mikromiekki);
+		firmy->push_back(Googol);
+		firmy->push_back(TrumpDonalds);
+		firmy->push_back(Smasnung);
+		firmy->push_back(UniwersytetLodzki);
+		firmy->push_back(KukaKula);
+		firmy->push_back(Poopsi);
+		firmy->push_back(Wiza);
+		firmy->push_back(PlacKolezka);
+		firmy->push_back(Mersidis);
+		firmy->push_back(PietraIndustries);
+		wyswietlacz->ekranPowitalny();
+		wyswietlacz->poczatekGry();
+		wyswietlacz->uzueplnijDane1();
+		nazwa = wejscie->pobierzString();
+		if (nazwa == "G0D") {
+			startowaKasa = 9999999999;
+			cel = -1;
+		}
+		else {
+			wyswietlacz->uzueplnijDane2();
+			cel = wejscie->pobierzLongDouble();
+			wyswietlacz->wybierzPoziomTrudnosci();
+			wybor = wejscie->pobierzInt();
+			switch (wybor) {
+			case 1:
+				startowaKasa = cel * 0.70;
+				break;
+			case 2:
+				startowaKasa = cel * 0.40;
+				break;
+			case 3:
+				startowaKasa = cel * 0.10;
+				break;
+			default:
+				std::cout << "Niepoprawny wybór, ustawiam poziom trudności na łatwy." << std::endl;
+				startowaKasa = 1000;
+				break;
+			};
+		}
+		this->gracz = Gracz(0, startowaKasa, nazwa, cel);
+		losujOferteBanku(*wspeKO);
+		glownaPetla();
+	}
 }
 void Silnik::glownaPetla() {
 	if (!lokacja) lokacja = wsulica;
 	while (true) {
 		liczKapital(gracz);
+		if (sprawdzanieWygranaPrzegrana(gracz)) {
+			return;
+		}
 		lokacja->wejdz(wyswietlacz, gracz, dni);
 		wybor = wejscie->pobierzInt();
 		switch (wybor) {
@@ -197,10 +212,12 @@ void Silnik::glownaPetla() {
 			lokacja = wspeKO;
 			break;
 		case 3:
-			//lokacja = wskasyno;
+			lokacja = wskasyno;
 			break;
 		case 4:
-			przespijSie();
+			if (przespijSie()) {
+				return;
+			}
 			if (gracz.getKredytGracza().getCzas() == -1) {
 				wspeKO->setCzyKredyt(false);
 			}
@@ -219,7 +236,7 @@ void Silnik::glownaPetla() {
 			lokacja = wsulica;
 		}
 		 else if (lokacja == wskasyno) {
-			//wKasynie();
+			wKasynie();
 			lokacja = wsulica;
 		}
 		 else if (lokacja == wsulica) {
@@ -231,10 +248,14 @@ void Silnik::glownaPetla() {
 		}
 	}
 }
-void Silnik::przespijSie() {
+bool Silnik::przespijSie() {
 	dni++;
+	pobierzKosztyZycia(gracz);
+	if (sprawdzanieWygranaPrzegrana(gracz)) {
+		return true;
+	}
 	gracz.getKredytGracza().uplywDni();
-	wspeKO->getKredyt().oprocentowanieDziennie();
+	gracz.getKredytGracza().oprocentowanieDziennie(dni);
 	wspeKO->ponaglij(wyswietlacz, gracz);
 	wspeKO->zbierzHaracz(gracz, wyswietlacz);
 	wyswietlacz->przespijSie();
@@ -244,12 +265,23 @@ void Silnik::przespijSie() {
 	if (dni % 11 == 0) {
 		wyplacDywidendy(gracz, *firmy);
 	}
+	return false;
 }
 void Silnik::naUlicy() {
 	wyswietlacz->glowneMenu(gracz, dni);
 	wybor = wejscie->pobierzInt();
 }
-
+bool Silnik::sprawdzanieWygranaPrzegrana(Gracz& gracz) {
+	if (gracz.getKapital() >= gracz.getCel() && gracz.getCel() != -1) {
+		wyswietlacz->WYGRANA(getDni());
+		return true;
+	}
+	if (gracz.getSrodki() < 0) {
+		wyswietlacz->PRZEGRANA(getDni());
+		return true;
+	}
+	return false;
+}
 
 void Silnik::wBanku() {
 	bool wyjscie = false;
@@ -335,10 +367,18 @@ void Silnik::wDomuMaklerskim() {
 		case 2:
 			wyswietlacz->zarzadzajAktywami(gracz);
 			wybor = wejscie->pobierzInt();
+
 			if (wybor == 1) {
 				wyswietlacz->sprawdzNotowania(*firmy);
 				wyswietlacz->spytajOKtore();
 				ktore = wejscie->pobierzInt();
+
+				if (ktore <= 0 || ktore > firmy->size()) {
+					std::cout << "Nie ma takiej firmy na gieldzie!\n";
+					system("pause");
+					break;
+				}
+
 				temp = &(*firmy)[ktore - 1];
 				wyswietlacz->infoNotowanie(*temp);
 				wyswietlacz->spytajOIlosc();
@@ -348,23 +388,38 @@ void Silnik::wDomuMaklerskim() {
 			else if (wybor == 2) {
 				if (gracz.getPosiadaneAkcje().empty()) {
 					wyswietlacz->nieMaszAkcji();
+					system("pause");
 					break;
 				}
-				else {
-					wyswietlacz->spytajOKtore();
-					ktore = wejscie->pobierzInt();
-					if (ktore <= 0 || ktore > gracz.getPosiadaneAkcje().size()) {
-						wyswietlacz->brakAkcjiNumer();
+
+				wyswietlacz->spytajOKtore();
+				ktore = wejscie->pobierzInt();
+
+				if (ktore <= 0 || ktore > gracz.getPosiadaneAkcje().size()) {
+					wyswietlacz->brakAkcjiNumer();
+					system("pause");
+					break;
+				}
+
+				std::string skrotWybranej = gracz.getPosiadaneAkcje()[ktore - 1].getSkrot();
+				temp = nullptr;
+
+				for (size_t j = 0; j < firmy->size(); ++j) {
+					if ((*firmy)[j].getAkcja().getSkrot() == skrotWybranej) {
+						temp = &(*firmy)[j];
 						break;
 					}
-					else {
-						temp = &(*firmy)[ktore - 1];
-						wyswietlacz->sprawdzWalorGracza(gracz, ktore);
-						wyswietlacz->sprzedajAktywo();
-						ilosc = wejscie->pobierzLongDouble();
-						wsgielda->sprzedajAkcje(gracz, ktore, ilosc, wyswietlacz);
-					}
 				}
+
+				if (temp != nullptr) {
+					wyswietlacz->sprawdzWalorGracza(gracz, ktore);
+					wyswietlacz->sprzedajAktywo();
+					ilosc = wejscie->pobierzLongDouble();
+					wsgielda->sprzedajAkcje(gracz, ktore, ilosc, wyswietlacz);
+				}
+			}
+			else {
+				wyswietlacz->niepoprawnyWybor();
 			}
 			break;
 		case 3:
@@ -376,6 +431,40 @@ void Silnik::wDomuMaklerskim() {
 		default:
 			wyswietlacz->niepoprawnyWybor();
 			break;
+		}
+	}
+}
+
+void Silnik::wKasynie() {
+	bool wyjscie = false;
+	int wybor;
+	long double stawka;
+	while (!wyjscie) {
+		wyswietlacz->wKasynie();
+		wybor = wejscie->pobierzInt();
+		switch (wybor) {
+		case 1:
+			wyswietlacz->wyborGry();
+			wybor = wejscie->pobierzInt();
+			if (wybor == 1) {
+				wyswietlacz->stawka();
+				stawka = wejscie->pobierzLongDouble();
+				wskasyno->blackJack(gracz, stawka, wejscie, wyswietlacz);
+			}
+			else if (wybor == 2) {
+				wyswietlacz->stawka();
+				stawka = wejscie->pobierzLongDouble();
+				wskasyno->zagrajWRuletke(gracz, stawka, wejscie, wyswietlacz);
+			}
+			else {
+				wyswietlacz->niepoprawnyWybor();
+			}
+			break;
+		case 2:
+			wyswietlacz->rozejrzyjSieKasyno();
+			break;
+		case 3:
+			wyjscie = true;
 		}
 	}
 }

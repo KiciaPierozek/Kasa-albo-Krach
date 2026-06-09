@@ -65,10 +65,18 @@ public:
     void wKasynie() override;
     void wyborGry() override;
     void stawka() override;
-    void blackJack() override;
-    void obstaw() override;
-    void ruletka() override;
     void kasynoWygrana(long double wygrana) override;
     void kasynoPrzegrana() override;
     void rozejrzyjSieKasyno() override;
+    void pokazStanGryBlackjack(const std::string& kartyKrupiera, const std::string& kartyGracza, int punktyGracza) override;
+    void pokazWynikBlackjack(const std::string& kartyKrupiera, int pktKrupiera, const std::string& kartyGracza, int pktGracza, int rezultat) override;
+	void nieMaszSrodkow() override;
+	void fura() override;
+	void wybierzKarte() override;
+    void pokazMenuRuletki() override;
+    void pokazWynikRuletki(int wylosowanaLiczba, const std::string& kolor, long double wygranaKwota, long double stawka) override;
+
+    //INNE
+    void WYGRANA(int dni) override;
+	void PRZEGRANA(int dni) override;
 };

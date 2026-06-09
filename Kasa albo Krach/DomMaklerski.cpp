@@ -7,6 +7,9 @@ void DomMaklerski::wejdz(std::shared_ptr<InterfejsWyswietlacza> wyswietlacz, Gra
     }
 }
 void DomMaklerski::KupAkcje(Gracz& gracz, Firma& firma, long double ilosc, std::shared_ptr<InterfejsWyswietlacza> wyswietlacz) {
+    if (ilosc == 0) {
+        return;
+    }
     long double koszt = firma.getAkcja().getCena() * ilosc;
 
     if (gracz.getSrodki() < koszt) {

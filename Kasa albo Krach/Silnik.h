@@ -25,6 +25,7 @@ private:
     std::shared_ptr<Ulica> wsulica;
     std::shared_ptr<InterfejsWyswietlacza> wyswietlacz;
 	std::shared_ptr<InterfejsWejscia> wejscie;
+	std::shared_ptr<bool> granko = std::make_shared<bool>(true);
     short wybor = 0;
     int dni = 1;
 
@@ -40,7 +41,7 @@ public:
 	void losujOferteBanku(Bank& bank);
     void wyplacDywidendy(Gracz& gracz, std::vector<Firma>& wszystkieFirmy);
 	long double losujWspolczynnikZmianyCeny();
-	void przespijSie();
+	bool przespijSie();
     void pobierzKosztyZycia(Gracz& gracz);
     void start();
     void naUlicy();
@@ -51,4 +52,5 @@ public:
     int getDni() {
         return dni;
 	}
+    bool sprawdzanieWygranaPrzegrana(Gracz& gracz);
 };
